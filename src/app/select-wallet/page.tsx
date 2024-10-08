@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import BgImage from '../assets/images/startbg.png'
+import BgImage from '../assets/images/start-bg.png'
 import Navbar from '../_components/navbar/navbar'
 import { Coinbase, Metamask, WalletConnect } from '../assets/icons/icons'
 
@@ -22,7 +22,7 @@ const SelectWallet = () => {
               Choose a wallet you want to connect. There are several wallet providers.
             </span>
           </div>
-            <div className='flex flex-col gap-6 xl:w-6/12 w-10/12 mt-8'>
+            {/* <div className='flex flex-col gap-6 xl:w-6/12 w-10/12 mt-8'>
                 <div className='flex flex-row px-6 py-4 gap-4 items-center border border-[#fff] rounded-[20px]'>
                     <span>
                         <Metamask />
@@ -41,7 +41,7 @@ const SelectWallet = () => {
                     </span>
                     <span>Coinbase</span>
                 </div>
-            </div>
+            </div> */}
         </div>
       </div>
     </div>
