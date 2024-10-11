@@ -17,7 +17,7 @@ const DefaultButton = ({ children, to, className, addClass }: Props) => {
   }
   return (
     <Link href={to} className={`flex justify-center gap-2 ${customClassName} ${
-        addClass == undefined ?? ""
+        addClass == undefined && ""
     }`}>
      {children}
     </Link>
