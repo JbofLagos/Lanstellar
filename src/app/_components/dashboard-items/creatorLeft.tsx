@@ -3,7 +3,7 @@ import { ArrowDown, ArrowUp, EllipseSm, EllipseXl } from '~/app/assets/icons/ico
 
 const CreatorLeft = () => {
   return (
-    <div className='flex flex-col items-center justify-around w-full '>
+    <div className='flex flex-col items-center justify-around w-full'>
        <span className='cursor-pointer'>
          <ArrowUp />
        </span>
