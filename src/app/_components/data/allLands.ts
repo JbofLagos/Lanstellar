@@ -205,37 +205,37 @@ export const FEATURED_ESTATES = [
         img: Estate1,
         name: "Oceanfront Oasis",
         time: "18h : 17m : 29s",
-        bid: "17.53 ETH"
+        price: "17.53 ETH"
     },
     {
         img: Estate2,
         name: "Mountain Retreat",
         time: "18h : 17m : 29s",
-        bid: "17.53 ETH"
+        price: "17.53 ETH"
     },
     {
         img: Estate1,
         name: "Mountain Retreat",
         time: "18h : 17m : 29s",
-        bid: "17.53 ETH"
+        price: "17.53 ETH"
     },
     {
         img: Estate2,
         name: "Mountain Retreat",
         time: "18h : 17m : 29s",
-        bid: "17.53 ETH"
+        price: "17.53 ETH"
     },
     {
         img: Estate1,
         name: "Mountain Retreat",
         time: "18h : 17m : 29s",
-        bid: "17.53 ETH"
+        price: "17.53 ETH"
     },
     {
         img: Estate2,
         name: "Mountain Retreat",
         time: "18h : 17m : 29s",
-        bid: "17.53 ETH"
+        price: "17.53 ETH"
     }
 ];
 

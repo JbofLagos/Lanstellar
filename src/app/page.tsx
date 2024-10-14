@@ -6,7 +6,7 @@ import BgImage from './assets/images/start-bg.png'
 import Navbar from './_components/navbar/navbar'
 import { Coinbase, Metamask, WalletConnect } from './assets/icons/icons'
 import DefaultButton from './_components/buttons/defaultButton';
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const HomePage = () => {
   return (

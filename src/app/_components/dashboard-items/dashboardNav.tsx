@@ -29,9 +29,9 @@ const DashboardNav = () => {
         </div>
       </div>
       <div className='flex flex-row gap-8 items-center'>
-        <div className='flex w-[180px] bg-[#FFD000] rounded-[16px] py-2 items-center justify-center text-[16px] text-[#1E1E1E]'>
+        {/* <div className='flex w-[180px] bg-[#FFD000] rounded-[16px] py-2 items-center justify-center text-[16px] text-[#1E1E1E]'>
           + Create
-        </div>
+        </div> */}
 
         <span>
           <NotificationIcon />
