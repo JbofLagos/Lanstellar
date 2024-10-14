@@ -13,6 +13,7 @@ interface DashboardModalProps {
 }
 
 export default function DashboardModal({ details, closeModal }: DashboardModalProps) {
+    // const imageSrc: string = details.img.src;
   return (
     <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center">
       <div
@@ -25,6 +26,8 @@ export default function DashboardModal({ details, closeModal }: DashboardModalPr
             src={details.img}
             alt="image"
             className="h-[80vh] w-[40vw] object-cover"
+            // width={500}
+            // height={500}
           />
         </div>
         <div className="w-50 content-center space-y-6 p-12">

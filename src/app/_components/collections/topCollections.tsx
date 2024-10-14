@@ -23,7 +23,12 @@ const TopCollections = ({
   const rowsPerPage = 3;
 
   const [currentPage, setCurrentPage] = useState(1); // State for current page
-  const totalPages = Math.ceil(NFTS_LAND.length / rowsPerPage); // Calculate total pages
+    const totalPages = Math.ceil(NFTS_LAND.length / rowsPerPage); // Calculate total pages
+    
+    const page = totalPages;
+    // const pageArray: number[] = [...Array(page)] as number[];
+    const pageNumber: number[] = Array.from({ length: page }, (_, i) => i + 1);
+    // const pageNumber = pageArray.map((_, i: number) => i + 1);
 
   // Calculate the indices for the data slice
   const startIndex = (currentPage - 1) * rowsPerPage;
@@ -31,13 +36,17 @@ const TopCollections = ({
   const currentData = NFTS_LAND.slice(startIndex, endIndex); // Slice the data for current page
 
   // Handle pagination
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
+//   const handleNextPage = () => {
+//     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+//   };
 
-  const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
+//   const handlePreviousPage = () => {
+//     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+//     };
+    
+    const handlePage = (number: number) => {
+      setCurrentPage(Math.min(number, totalPages));
+    };
 
   // const [modal, setModal] = useState(false);
   // const [nftDetails, setNftDetails] = useState<nftDetails>({
@@ -182,7 +191,7 @@ const TopCollections = ({
           </span>
           <div className="flex flex-row rounded-[16px] bg-[#1C092A] py-2 pr-3">
             <div className="flex flex-row gap-14">
-              <button
+              {/* <button
                 className="flex w-full items-center justify-center rounded-[16px] bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black disabled:bg-yellow-700"
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
@@ -195,20 +204,20 @@ const TopCollections = ({
                 disabled={currentPage === totalPages}
               >
                 Next
-              </button>
-              {/* {page.map((number) => (
-              <span
-                key={number}
-                onClick={() => handleSelectPage(number)}
-                className={`cursor-pointer rounded-[16px] px-4 py-2 text-[18px] ${
-                  selectedPage === number
-                    ? "bg-[#FFD000] text-black"
-                    : "text-white"
-                }`}
-              >
-                {number}
-              </span>
-            ))} */}
+              </button> */}
+              {pageNumber.map((number) => (
+                <span
+                  key={number}
+                  onClick={() => handlePage(number)}
+                  className={`cursor-pointer rounded-[16px] px-4 py-2 text-[18px] ${
+                    currentPage === number
+                      ? "bg-[#FFD000] text-black"
+                      : "text-white"
+                  }`}
+                >
+                  {number}
+                </span>
+              ))}
             </div>
           </div>
         </div>
