@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import Image from 'next/image'
 import Pfp from '../../assets/images/ronaldo.png'
 import BaseModal from '../modals/basemodal';
-
-import { ConnectIcon, Metamask, Coinbase, WalletConnect, Phantom, NotificationIcon, SearchEllipse } from '~/app/assets/icons/icons'
+//  Phantom,
+import { ConnectIcon, Metamask, Coinbase, WalletConnect, NotificationIcon, SearchEllipse } from '~/app/assets/icons/icons'
 
 const DashboardNav = () => {
   const router = useRouter();
@@ -66,12 +66,12 @@ const DashboardNav = () => {
                   </span>
                   <span className='text-white text-[20px] font-light'>Coinbase</span>
               </div>
-              <div className='flex flex-row items-center px-4 gap-8'>
+              {/* <div className='flex flex-row items-center px-4 gap-8'>
                   <span>
                     <Phantom />
                   </span>
                   <span className='text-white text-[20px] font-light'>Phantom</span>
-              </div>
+              </div> */}
               <div className='flex flex-row items-center px-4 gap-8'>
                   <span>
                     <WalletConnect />
