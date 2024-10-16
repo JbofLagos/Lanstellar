@@ -43,12 +43,12 @@ const HomePage = () => {
                     </span>
                     <span>Metamask</span>
                 </div>
-                <div className='flex flex-row px-6 py-4 gap-4 items-center border border-[#fff] rounded-[20px]'>
+                {/* <div className='flex flex-row px-6 py-4 gap-4 items-center border border-[#fff] rounded-[20px]'>
                     <span>
                        <WalletConnect />
                     </span>
                     <span>Wallet Connect</span>
-                </div>
+                </div> */}
                 <div className='flex flex-row px-6 py-4 gap-4 items-center border border-[#fff] rounded-[20px]'>
                     <span>
                         <Coinbase />

@@ -15,12 +15,12 @@ interface DashboardModalProps {
 export default function DashboardModal({ details, closeModal }: DashboardModalProps) {
     // const imageSrc: string = details.img.src;
   return (
-    <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center">
+    <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center transition duration-1000 ease-in-out">
       <div
-        className="z-25 fixed inset-0 h-screen w-screen bg-[#000000cc]/45"
+        className="z-25 fixed inset-0 h-screen w-screen bg-[#000000cc]/45 transition duration-1000 ease-in-out"
         onClick={closeModal}
       ></div>
-      <div className="bg-color z-10 flex h-[80vh] w-[75vw]">
+      <div className="bg-color z-10 flex h-[80vh] w-[75vw] transition duration-1000 ease-in-out">
         <div className="w-50">
           <Image
             src={details.img}
