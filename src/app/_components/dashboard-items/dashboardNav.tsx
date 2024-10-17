@@ -1,15 +1,32 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from 'next/image'
-import Pfp from '../../assets/images/ronaldo.png'
+import { useAccount } from "wagmi";
+// import Pfp from '../../assets/images/ronaldo.png'
 import BaseModal from '../modals/basemodal';
-//  Phantom,
-import { ConnectIcon, Metamask, Coinbase, WalletConnect, NotificationIcon, SearchEllipse } from '~/app/assets/icons/icons'
+//  Phantom,WalletConnect,ConnectIcon, 
+import { Metamask, Coinbase, NotificationIcon, SearchEllipse } from '~/app/assets/icons/icons'
+
+import {
+  ConnectWallet,
+  Wallet,
+  WalletDropdown,
+  WalletDropdownDisconnect,
+} from "@coinbase/onchainkit/wallet";
+import { Address, Avatar, Name, Identity } from "@coinbase/onchainkit/identity";
 
 const DashboardNav = () => {
   const router = useRouter();
   const [connect, setConnect] = useState(false);
+
+  const { isConnected } = useAccount();
+
+  useEffect(() => {
+    if (!isConnected) {
+      router.push(`/`);
+    }
+  }, [isConnected]);
 
   return (
     <div className="relative flex w-full flex-row items-center justify-between px-14 py-1">
@@ -45,13 +62,29 @@ const DashboardNav = () => {
           <NotificationIcon />
         </span>
 
-        <div
+        <Wallet>
+          <ConnectWallet className="border-3 border-[#fff] bg-[#93b7be52] text-[#fff]">
+            <Avatar className="h-6 w-6" />
+            <Name />
+          </ConnectWallet>
+          <WalletDropdown className="bg-gray-300">
+            <Identity className="px-4 pb-2 pt-3" hasCopyAddressOnClick>
+              <Avatar />
+              <Name className="text-[#fff]" />
+              <Address className="text-[#fff]" />
+            </Identity>
+            <WalletDropdownDisconnect className="bg-[#FFD000] stroke-[#230C33] stroke-2 font-bold text-[#230C33] hover:bg-[#FFD000]" />
+          </WalletDropdown>
+        </Wallet>
+
+        {/* <div
           className="flex w-[180px] cursor-pointer items-center justify-start gap-4 rounded-[16px] bg-[#93b7be52] px-4 py-2 text-[16px] text-[#1E1E1E]"
           onClick={() => setConnect(true)}
         >
+          
           <ConnectIcon />
           <span className="text-[16px] text-white">Connect</span>
-        </div>
+        </div> */}
 
         {/* <div>
           <Image src={Pfp} alt='profile picture' />
