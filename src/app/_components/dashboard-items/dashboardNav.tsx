@@ -22,11 +22,11 @@ const DashboardNav = () => {
 
   const { isConnected } = useAccount();
 
-  useEffect(() => {
-    if (!isConnected) {
-      router.push(`/`);
-    }
-  }, [isConnected]);
+  // useEffect(() => {
+  //   if (!isConnected) {
+  //     router.push(`/`);
+  //   }
+  // }, [isConnected]);
 
   return (
     <div className="relative flex w-full flex-row items-center justify-between px-14 py-1">
@@ -62,7 +62,7 @@ const DashboardNav = () => {
           <NotificationIcon />
         </span>
 
-        <Wallet>
+        {isConnected && <Wallet>
           <ConnectWallet className="border-3 border-[#fff] bg-[#93b7be52] text-[#fff]">
             <Avatar className="h-6 w-6" />
             <Name />
@@ -75,7 +75,7 @@ const DashboardNav = () => {
             </Identity>
             <WalletDropdownDisconnect className="bg-[#FFD000] stroke-[#230C33] stroke-2 font-bold text-[#230C33] hover:bg-[#FFD000]" />
           </WalletDropdown>
-        </Wallet>
+        </Wallet>}
 
         {/* <div
           className="flex w-[180px] cursor-pointer items-center justify-start gap-4 rounded-[16px] bg-[#93b7be52] px-4 py-2 text-[16px] text-[#1E1E1E]"
