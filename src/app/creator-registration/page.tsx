@@ -4,7 +4,7 @@ import Navbar from "../_components/navbar/navbar";
 import CreatorLeft from "../_components/dashboard-items/creatorLeft";
 import CreatorForm from "../_components/dashboard-items/creatorForm";
 import {
-  type BaseError
+  type BaseError,
   useAccount,
   useWriteContract,
   useWaitForTransactionReceipt,
