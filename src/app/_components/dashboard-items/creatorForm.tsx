@@ -1,47 +1,45 @@
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
-import Image from "next/image";
-import { ChevronDown, Upload } from "~/app/assets/icons/icons";
-import DefaultButton from "../buttons/defaultButton";
-import BaseModal from "../modals/basemodal";
+// import { useEffect } from "react";
+// import { useRouter } from "next/navigation";
+// import { useForm } from "react-hook-form";
+// import Image from "next/image";
+// import { ChevronDown, Upload } from "~/app/assets/icons/icons";
+// import DefaultButton from "../buttons/defaultButton";
+// import BaseModal from "../modals/basemodal";
+import { ConnectWallet, ConnectWalletText, Wallet, WalletDropdown, WalletDropdownDisconnect } from "@coinbase/onchainkit/wallet";
+import { Address, Avatar, Identity, Name } from "@coinbase/onchainkit/identity";
 
-// interface IFormInputs {
-//   first_name: string;
-//   last_name: string;
-// }
+interface CreatorFormProps {
+  verifyAddress: () => void;
+  confirming: boolean;
+}
 
-const CreatorForm = () => {
-  const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid },
-  } = useForm({
-    mode: "onChange",
-  });
-  const [accountCreated, setAccountCreated] = useState(false);
+const CreatorForm = ({ verifyAddress, confirming }: CreatorFormProps) => {
+  // const router = useRouter();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors, isValid },
+  // } = useForm({
+  //   mode: "onChange",
+  // });
+  // const [accountCreated, setAccountCreated] = useState(false);
 
-  const [preview, setPreview] = useState<string | null>(null);
+  // const [preview, setPreview] = useState<string | null>(null);
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const fileURL = URL.createObjectURL(file);
-      setPreview(fileURL);
-    }
-  };
+  // const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const fileURL = URL.createObjectURL(file);
+  //     setPreview(fileURL);
+  //   }
+  // };
 
-    function submitForm(value: any) {
-        console.log("value", value, preview);
-    }
- 
-  const maxLength = 2500;
+  // const maxLength = 2500;
   return (
     <div className="w-full">
-      <div className="flex w-full gap-10 px-1 py-3">
+      {/* <div className="flex w-full gap-10 px-1 py-3">
         <div className="flex h-[530px] w-8/12 flex-col gap-10 overflow-y-scroll">
           <div className="flex flex-col">
             <span className="text-[24px] text-[#FFD000]">
@@ -359,25 +357,34 @@ const CreatorForm = () => {
               />
             </label>
           </div>
-          {/* <div className="ml-2 mt-4 flex w-11/12 items-center justify-center">
-            <DefaultButton addClass="w-6/12" className="default-btn" to="">
-              Upload
-            </DefaultButton>
-          </div> */}
         </div>
-      </div>
+      </div> */}
 
-      <div className="mx-auto flex w-3/12 items-center justify-center">
+      <div className="mx-auto w-3/12 flex-col justify-center">
+        <Wallet>
+          <ConnectWallet className="border border-[#fff] bg-[#230C33] px-32 py-7 hover:bg-[#230c33]">
+            <Avatar className="h-6 w-6" />
+            <Name />
+          </ConnectWallet>
+          <WalletDropdown className="bg-gray-300">
+            <Identity className="px-4 pb-2 pt-3" hasCopyAddressOnClick>
+              <Avatar />
+              <Name className="text-[#fff]" />
+              <Address className="text-[#fff]" />
+            </Identity>
+            <WalletDropdownDisconnect className="bg-[#FFD000] stroke-[#230C33] stroke-2 font-bold text-[#230C33] hover:bg-[#FFD000]" />
+          </WalletDropdown>
+        </Wallet>
         <button
-          className="flex w-full items-center justify-center rounded-[16px] disabled:bg-yellow-700 bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black"
-          onClick={handleSubmit(submitForm)}
-          disabled={!isValid || !preview}
+          className="mt-5 flex w-[26vw] items-center justify-center rounded-[16px] bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black disabled:bg-yellow-700"
+          onClick={verifyAddress}
+          disabled={confirming}
         >
-          Create Account
+          verify Address
         </button>
       </div>
 
-      <BaseModal
+      {/* <BaseModal
         open={accountCreated}
         setOpen={setAccountCreated}
         className="special-index bottom-0 top-0 mx-auto my-auto flex h-[300px] w-full items-center justify-center rounded-[16px] xl:w-[450px]"
@@ -391,7 +398,7 @@ const CreatorForm = () => {
             Proceed
           </div>
         </div>
-      </BaseModal>
+      </BaseModal> */}
     </div>
   );
 };

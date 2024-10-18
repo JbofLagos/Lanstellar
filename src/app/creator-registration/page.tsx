@@ -1,10 +1,51 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../_components/navbar/navbar";
 import CreatorLeft from "../_components/dashboard-items/creatorLeft";
 import CreatorForm from "../_components/dashboard-items/creatorForm";
+import {
+  useAccount,
+  useWriteContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
+import { useRouter } from "next/navigation";
+import { verifierAbi } from "~/Constants/ABI/verifyWalletAddress";
 
 const CreatorRegistration = () => {
+
+  const router = useRouter();
+  const { isConnected } = useAccount();
+
+  useEffect(() => {
+    if (!isConnected) {
+      router.push(`/`);
+    }
+  }, [isConnected]);
+
+  const { address: userWalletAddress } = useAccount();
+
+  const { data: hash, writeContract } = useWriteContract();
+
+  function verifyAddress() {
+    writeContract({
+      address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
+      abi: verifierAbi,
+      functionName: "authorizeAddress",
+      args: [userWalletAddress as `0x${string}`],
+    });
+  }
+
+  const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    useWaitForTransactionReceipt({
+      hash,
+    });
+
+  useEffect(() => {
+    if (isConfirmed) {
+      router.push(`/creator`);
+    }
+  }, [isConfirmed]);
+
   return (
     //  relative flex flex-col h-screen
     <div>
@@ -16,7 +57,7 @@ const CreatorRegistration = () => {
           <CreatorLeft />
         </div>
         <div className="bg-color w-full content-center p-4">
-          <CreatorForm />
+          <CreatorForm verifyAddress={verifyAddress} confirming={isConfirming} />
         </div>
       </div>
     </div>

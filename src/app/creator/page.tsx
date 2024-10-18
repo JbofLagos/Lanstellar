@@ -1,5 +1,7 @@
 'use client';
 import { useState } from "react";
+import { useAccount, useReadContract } from "wagmi";
+import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
 import DashboardLayout from '../_components/dashboard-items/dashboardLayout'
 import Estates from '../_components/estates/estates'
 import TopCollections from '../_components/collections/topCollections';
@@ -14,6 +16,15 @@ export interface nftDetails {
 
 
 const Creator = () => {
+
+  const { data } = useReadContract({
+    address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+    abi: lanStellarAbi,
+    functionName: "getListedProperties",
+  });
+
+  console.log(data);
+
   const [modal, setModal] = useState(false);
   const [nftDetails, setNftDetails] = useState<nftDetails>({
     name: "",

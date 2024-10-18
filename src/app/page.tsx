@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { useAccount } from "wagmi";
+import { useAccount, useReadContract } from "wagmi";
 // import BgImage from './assets/images/start-bg.png'
 import lanstel from "./assets/images/lanstel-bg.png";
 import Navbar from "./_components/navbar/navbar";
@@ -10,19 +10,54 @@ import Navbar from "./_components/navbar/navbar";
 import { useRouter } from "next/navigation";
 import { ConnectWallet, ConnectWalletText, Wallet } from "@coinbase/onchainkit/wallet";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
+import { verifierAbi } from "~/Constants/ABI/verifyWalletAddress";
 
 const HomePage = () => {
   const router = useRouter();
   // const [walletConnected, setWalletConnected] = useState(false);
   // const [walletAddress, setWalletAddress] = useState<string | null>(null);
 
-  const { isConnected } = useAccount();
+  const {address: userWalletAddress, isConnected } = useAccount();
+
+const { data: isValid } = useReadContract({
+  address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
+  abi: verifierAbi,
+  functionName: "verify",
+  args: [userWalletAddress as `0x${string}`],
+});
+
+  // function checkIfUserIsVerified() {
+  //   const { data: isValid } = useReadContract({
+  //     address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
+  //     abi: Verifier,
+  //     functionName: "verify",
+  //     args: [userWalletAddress as `0x${string}`],
+  //   });
+
+  //   if (isValid) {
+  //     return router.push(`/creator`);
+  //   } else {
+  //     return router.push(`/creator-registration`);
+  //   }
+  // }
+
+  // if (isConnected && userWalletAddress) {
+  //   if (isValid) {
+  //     return router.push(`/creator`);
+  //   } else {
+  //     return router.push(`/creator-registration`);
+  //   }
+  // }
 
   useEffect(() => {
-    if (isConnected) {
-      router.push(`/creator`);
+    if (isConnected && userWalletAddress) {
+      if (isValid) {
+        return router.push(`/creator`);
+      } else {
+        return router.push(`/creator-registration`);
+      }
     }
-  }, [isConnected]);
+  }, [isConnected, userWalletAddress]);
   return (
     <div className="flex h-screen flex-col">
       <div className="fixed z-10 h-[88px] w-full">
@@ -57,7 +92,6 @@ const HomePage = () => {
             {/* <div className="flex flex-row items-center gap-4 rounded-[20px] border border-[#fff] px-6 py-4"></div> */}
             <div className="flex justify-center">
               <Wallet className="border-gray-300">
-                {/* <ConnectWallet className="border-3 rounded-[20px] border-gray-300 bg-[#230C33] px-32 py-7 text-[16px] text-[#ffffff] hover:bg-[#FFD000]"> */}
                 <ConnectWallet className="border border-[#fff] bg-[#230C33] px-32 py-7 hover:bg-[#230c33]">
                   <ConnectWalletText className="font-bold text-white">
                     Connect Wallet
