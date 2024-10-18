@@ -4,6 +4,7 @@ import Navbar from "../_components/navbar/navbar";
 import CreatorLeft from "../_components/dashboard-items/creatorLeft";
 import CreatorForm from "../_components/dashboard-items/creatorForm";
 import {
+  type BaseError
   useAccount,
   useWriteContract,
   useWaitForTransactionReceipt,
@@ -24,7 +25,7 @@ const CreatorRegistration = () => {
 
   const { address: userWalletAddress } = useAccount();
 
-  const { data: hash, writeContract } = useWriteContract();
+  const { data: hash, error, writeContract } = useWriteContract();
 
   function verifyAddress() {
     writeContract({
@@ -45,6 +46,12 @@ const CreatorRegistration = () => {
       router.push(`/creator`);
     }
   }, [isConfirmed]);
+
+  useEffect(() => {
+    if (error) {
+      alert((error as BaseError).shortMessage || error.message);
+    }
+  }, [error]);
 
   return (
     //  relative flex flex-col h-screen
