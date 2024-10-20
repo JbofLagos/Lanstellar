@@ -118,27 +118,27 @@ const TopCollections = ({
         <div className="mt-4 flex w-full justify-between">
           <table className="flex w-full flex-col gap-1">
             <thead className="mb-4 flex w-full flex-row pl-32 pr-4">
-              <td className="flex w-full items-start">
+              <tr className="flex w-full items-start">
                 <td className="flex flex-row gap-2 font-bold">
                   <p className="text-[20px] text-white">#</p>
-                  <p className="text-[20px] text-white">NFT Lands</p>
+                  <p className="text-[20px] text-white">NFT Name</p>
                 </td>
-              </td>
-              <td className="flex w-full flex-row items-end justify-end gap-20 font-bold">
+              </tr>
+              <tr className="flex w-full flex-row items-end justify-end gap-20 font-bold">
                 <td className="">
-                  <p className="text-[16px] text-white">Attribute</p>
+                  <p className="text-[16px] text-white">For Sale</p>
                 </td>
 
                 <td className="">
                   <p className="text-[16px] text-white">Price</p>
                 </td>
                 <td className="">
-                  <p className="text-[16px] text-white">Volume</p>
+                  <p className="text-[16px] text-white">TokenID</p>
                 </td>
-                <td className="">
+                {/* <td className="">
                   <p className="text-[16px] text-white">Listed</p>
-                </td>
-              </td>
+                </td> */}
+              </tr>
             </thead>
             {currentData.map((asset, index) => (
               <tbody
@@ -150,7 +150,7 @@ const TopCollections = ({
                   toggleModal();
                 }}
               >
-                <td className="flex w-full items-start">
+                <tr className="flex w-full items-start">
                   <td className="flex flex-row items-center gap-2">
                     <p className="text-[16px] text-white">{index + 1}</p>
                     <div className="relative">
@@ -164,8 +164,8 @@ const TopCollections = ({
 
                     <p className="text-[16px] text-white">{asset.name}</p>
                   </td>
-                </td>
-                <td className="flex w-full flex-row items-end justify-end gap-20">
+                </tr>
+                <tr className="flex w-full flex-row items-end justify-end gap-20">
                   <td className="">
                     <p className="text-[16px] text-white">{asset.attribute}</p>
                   </td>
@@ -176,10 +176,10 @@ const TopCollections = ({
                   <td className="">
                     <p className="text-[16px] text-white">{asset.volume}</p>
                   </td>
-                  <td className="">
+                  {/* <td className="">
                     <p className="text-[16px] text-white">{asset.listed}</p>
-                  </td>
-                </td>
+                  </td> */}
+                </tr>
               </tbody>
             ))}
           </table>

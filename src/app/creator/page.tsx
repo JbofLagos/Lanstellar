@@ -1,6 +1,7 @@
 'use client';
 import { useState } from "react";
-import { useAccount, useReadContract } from "wagmi";
+import { useWriteContract,
+  useWaitForTransactionReceipt, useReadContract } from "wagmi";
 import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
 import DashboardLayout from '../_components/dashboard-items/dashboardLayout'
 import Estates from '../_components/estates/estates'
@@ -23,7 +24,7 @@ const Creator = () => {
     functionName: "getListedProperties",
   });
 
-  console.log(data);
+  console.log("propertiesdata:", data);
 
   const [modal, setModal] = useState(false);
   const [nftDetails, setNftDetails] = useState<nftDetails>({
@@ -34,6 +35,32 @@ const Creator = () => {
   function toggleModal() {
     setModal(!modal);
   }
+
+  // const { data: hash, error, writeContract } = useWriteContract();
+
+  // function handleWithdrawFunds() {
+  //   writeContract({
+  //     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+  //     abi: lanStellarAbi,
+  //     functionName: "withdrawFunds",
+  //     args: ["tokenID"],
+  //   });
+  // }
+
+  // function handleBuyProperty() {
+  //   writeContract({
+  //     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+  //     abi: lanStellarAbi,
+  //     functionName: "buyProperty",
+  //     args: [nftDetails.name, nftDetails.price],
+  //   });
+  // }
+
+  // const { isLoading: isConfirming, isSuccess: isConfirmed } =
+  //   useWaitForTransactionReceipt({
+  //     hash,
+  //   });
+
   return (
     <DashboardLayout current={1}>
       {modal && (

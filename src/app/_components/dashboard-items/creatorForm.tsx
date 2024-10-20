@@ -380,7 +380,7 @@ const CreatorForm = ({ verifyAddress, confirming }: CreatorFormProps) => {
           onClick={verifyAddress}
           disabled={confirming}
         >
-          verify Address
+          Verify Address
         </button>
       </div>
 

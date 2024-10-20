@@ -207,36 +207,36 @@ export const FEATURED_ESTATES = [
         time: "18h : 17m : 29s",
         price: "17.53 ETH"
     },
-    {
-        img: Estate2,
-        name: "Mountain Retreat",
-        time: "18h : 17m : 29s",
-        price: "17.53 ETH"
-    },
-    {
-        img: Estate1,
-        name: "Mountain Retreat",
-        time: "18h : 17m : 29s",
-        price: "17.53 ETH"
-    },
-    {
-        img: Estate2,
-        name: "Mountain Retreat",
-        time: "18h : 17m : 29s",
-        price: "17.53 ETH"
-    },
-    {
-        img: Estate1,
-        name: "Mountain Retreat",
-        time: "18h : 17m : 29s",
-        price: "17.53 ETH"
-    },
-    {
-        img: Estate2,
-        name: "Mountain Retreat",
-        time: "18h : 17m : 29s",
-        price: "17.53 ETH"
-    }
+    // {
+    //     img: Estate2,
+    //     name: "Mountain Retreat",
+    //     time: "18h : 17m : 29s",
+    //     price: "17.53 ETH"
+    // },
+    // {
+    //     img: Estate1,
+    //     name: "Mountain Retreat",
+    //     time: "18h : 17m : 29s",
+    //     price: "17.53 ETH"
+    // },
+    // {
+    //     img: Estate2,
+    //     name: "Mountain Retreat",
+    //     time: "18h : 17m : 29s",
+    //     price: "17.53 ETH"
+    // },
+    // {
+    //     img: Estate1,
+    //     name: "Mountain Retreat",
+    //     time: "18h : 17m : 29s",
+    //     price: "17.53 ETH"
+    // },
+    // {
+    //     img: Estate2,
+    //     name: "Mountain Retreat",
+    //     time: "18h : 17m : 29s",
+    //     price: "17.53 ETH"
+    // }
 ];
 
 

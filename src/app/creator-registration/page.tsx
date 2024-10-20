@@ -7,7 +7,7 @@ import {
   type BaseError,
   useAccount,
   useWriteContract,
-  useWaitForTransactionReceipt,
+  // useWaitForTransactionReceipt,
 } from "wagmi";
 import { useRouter } from "next/navigation";
 import { verifierAbi } from "~/Constants/ABI/verifyWalletAddress";
@@ -15,17 +15,17 @@ import { verifierAbi } from "~/Constants/ABI/verifyWalletAddress";
 const CreatorRegistration = () => {
 
   const router = useRouter();
-  const { isConnected } = useAccount();
+  
+  const { address: userWalletAddress, isConnected } = useAccount();
 
-  useEffect(() => {
-    if (!isConnected) {
-      router.push(`/`);
-    }
-  }, [isConnected]);
+  // useEffect(() => {
+  //   if (!isConnected) {
+  //     router.push(`/`);
+  //   }
+  // }, [isConnected]);
 
-  const { address: userWalletAddress } = useAccount();
 
-  const { data: hash, error, writeContract } = useWriteContract();
+  const { data: hash, isPending, error, writeContract } = useWriteContract();
 
   function verifyAddress() {
     writeContract({
@@ -36,16 +36,32 @@ const CreatorRegistration = () => {
     });
   }
 
-  const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    useWaitForTransactionReceipt({
-      hash,
-    });
+  // const { isLoading: isConfirming, isSuccess: isConfirmed } =
+  //   useWaitForTransactionReceipt({
+  //     hash,
+  //   });
+  
+  // console.log("hash:", hash, "isConfirming:", isConfirming, "isConfirmed:", isConfirmed);
+  // console.log("hash:", hash, "isPending:", isPending);
 
   useEffect(() => {
-    if (isConfirmed) {
-      router.push(`/creator`);
+    if (isConnected) {
+      if (hash) {
+        router.push(`/creator`);
+      }
+    } else {
+      router.push(`/`);
     }
-  }, [isConfirmed]);
+  }, [isConnected, hash]);
+
+  // useEffect(() => {
+  //   if (!isConnected) {
+  //     router.push(`/`);
+  //   }
+  //   if (isConfirmed) {
+  //     router.push(`/creator`);
+  //   }
+  // }, [isConnected, isConfirmed]);
 
   useEffect(() => {
     if (error) {
@@ -64,7 +80,7 @@ const CreatorRegistration = () => {
           <CreatorLeft />
         </div>
         <div className="bg-color w-full content-center p-4">
-          <CreatorForm verifyAddress={verifyAddress} confirming={isConfirming} />
+          <CreatorForm verifyAddress={verifyAddress} confirming={isPending} />
         </div>
       </div>
     </div>
