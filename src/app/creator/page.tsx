@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from "react";
-import { useWriteContract,
-  useWaitForTransactionReceipt, useReadContract } from "wagmi";
+import {useReadContract } from "wagmi";
 import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
 import DashboardLayout from '../_components/dashboard-items/dashboardLayout'
 import Estates from '../_components/estates/estates'
@@ -18,6 +17,15 @@ export interface nftDetails {
   tokenURI: string;
 }
 
+// export interface nftDetails {
+//   buyer: `0x${string}`;
+//   forSale: boolean;
+//   price: bigint;
+//   seller: `0x${string}`;
+//   tokenId: bigint;
+//   tokenURI: string;
+// }
+
 
 const Creator = () => {
 
@@ -31,11 +39,17 @@ const Creator = () => {
     functionName: "getListedProperties",
   });
 
+  // const { data } = useReadContract<nftDetails[]>({
+  //   address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+  //   abi: lanStellarAbi,
+  //   functionName: "getListedProperties",
+  // });
+
   // console.log("propertiesdata:", data);
 
   const [modal, setModal] = useState(false);
-  const [nftDetails, setNftDetails] = useState({
-    tokenId: 0,
+  const [nftDetails, setNftDetails] = useState<nftDetails>({
+    tokenId: 2,
     seller: "",
     price: 2,
     buyer: "",
