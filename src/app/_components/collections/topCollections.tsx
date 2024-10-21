@@ -156,16 +156,19 @@ const TopCollections = ({
                   <td className="flex flex-row items-center gap-2">
                     <p className="text-[16px] text-white">{index + 1}</p>
                     <div className="relative">
-                      <img
+                      {/* <img
                         className="h-[35px] w-[40px] rounded-[16px]"
                         src={asset.tokenURI}
                         alt="Avatar Preview"
-                      ></img>
-                      {/* <Image
-                        src={asset.img}
+                      ></img> */}
+
+                      <Image
+                        src={asset.tokenURI}
                         alt="land"
+                        width={40}
+                        height={40}
                         className="w-[40px] rounded-[8px]"
-                      /> */}
+                      />
                       {/* <Image src={asset.network} alt='eth' className='w-[16px] absolute top-[-1px] right-[-2px]' /> */}
                     </div>
 

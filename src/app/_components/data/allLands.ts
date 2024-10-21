@@ -3,7 +3,7 @@ import Bsc from "../../assets/icons/bsc.png";
 import Eth from "../../assets/icons/eth.png";
 
 import Estate1 from "../../assets/images/estate1.png";
-import Estate2 from "../../assets/images/estate2.png";
+// import Estate2 from "../../assets/images/estate2.png";
 
 
 import Asset1 from "../../assets/images/asset1.png";

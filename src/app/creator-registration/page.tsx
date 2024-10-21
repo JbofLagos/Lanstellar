@@ -29,7 +29,7 @@ const CreatorRegistration = () => {
     address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
     abi: verifierAbi,
     functionName: "verify",
-    args: [userWalletAddress as `0x${string}`],
+    args: [userWalletAddress!],
   });
 
 
@@ -40,7 +40,7 @@ const CreatorRegistration = () => {
       address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
       abi: verifierAbi,
       functionName: "authorizeAddress",
-      args: [userWalletAddress as `0x${string}`],
+      args: [userWalletAddress!],
     });
   }
 
@@ -60,7 +60,7 @@ const CreatorRegistration = () => {
     } else {
       router.push(`/`);
     }
-  }, [isConnected, hash]);
+  }, [isConnected, hash, router]);
 
   // useEffect(() => {
   //   if (!isConnected) {

@@ -32,16 +32,19 @@ const TrendingNow = ({
             }}
           >
             <div className="flex w-full flex-col rounded-[16px] bg-[#1C092A] p-4">
-              {/* <Image
+              <Image
                 src={trending.tokenURI}
                 alt="image"
-                className="h-[350px] w-full rounded-[16px] object-cover"
-              /> */}
-              <img
+                width={500}
+                height={300}
+                className="h-[350px] w-full rounded-[16px]"
+                // className="h-[350px] w-full rounded-[16px] object-cover"
+              />
+              {/* <img
                 className="h-[350px] w-full rounded-[16px] object-cover"
                 src={trending.tokenURI}
                 alt="Avatar Preview"
-              ></img>
+              ></img> */}
               <div className="flex flex-row items-center gap-2 py-4">
                 {/* <span className="text-[24px] font-semibold text-white">
                   {trending.name}

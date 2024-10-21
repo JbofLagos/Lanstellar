@@ -22,19 +22,19 @@ export default function DashboardModal({ details, closeModal }: DashboardModalPr
       ></div>
       <div className="bg-color z-10 flex h-[80vh] w-[75vw] transition duration-1000 ease-in-out">
         <div className="w-50">
-          {/* <Image
+          <Image
             src={details.tokenURI}
             alt="image"
             className="h-[80vh] w-[40vw] object-cover"
-            // width={500}
-            // height={500}
-          /> */}
-          <img
+            width={40}
+            height={80}
+          />
+          {/* <img
             className="h-full w-full rounded-[16px] object-cover"
             // src={`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${preview}`}
             src={details.tokenURI}
             alt="Avatar Preview"
-          ></img>
+          ></img> */}
         </div>
         <div className="w-50 content-center space-y-6 p-12">
           {/* <p className="text-[20px] font-bold text-white">

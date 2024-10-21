@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import BgImage from '../assets/images/start-bg.png'
 import Navbar from '../_components/navbar/navbar'
-import { Coinbase, Metamask, WalletConnect } from '../assets/icons/icons'
+// import { Coinbase, Metamask, WalletConnect } from '../assets/icons/icons'
 
 const SelectWallet = () => {
   return (

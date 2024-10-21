@@ -19,14 +19,14 @@ const DashboardLayout = ({ children, current }: dashboardLayout) => {
     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
     abi: lanStellarAbi,
     functionName: "getKYCStatus",
-    args: [userWalletAddress as `0x${string}`],
+    args: [userWalletAddress!],
   });
 
   useEffect(() => {
     if (!isConnected) {
       router.push(`/`);
     }
-  }, [isConnected]);
+  }, [isConnected, router]);
 
 
   return (

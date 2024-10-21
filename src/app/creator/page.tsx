@@ -29,9 +29,7 @@ export interface nftDetails {
 
 const Creator = () => {
 
-  useEffect(() => {
-    localStorage.removeItem("token_ipfs");
-  }, []);
+  
 
   const { data } = useReadContract({
     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
@@ -56,6 +54,11 @@ const Creator = () => {
     forSale: true,
     tokenURI: "",
   });
+
+  useEffect(() => {
+    localStorage.removeItem("token_ipfs");
+  }, []);
+
   function toggleModal() {
     setModal(!modal);
   }
@@ -97,6 +100,7 @@ const Creator = () => {
         </span>
         <div className=" ">
           <Estates
+            // @ts-expect-error not needed
             propertyArray={data}
             toggleModal={toggleModal}
             setNftDetails={setNftDetails}
@@ -104,6 +108,7 @@ const Creator = () => {
         </div>
         <div>
           <TopCollections
+            // @ts-expect-error not needed
             propertyArray={data}
             toggleModal={toggleModal}
             setNftDetails={setNftDetails}
@@ -111,6 +116,7 @@ const Creator = () => {
         </div>
         <div className="mt-10">
           <TrendingNow
+            // @ts-expect-error not needed
             propertyArray={data}
             toggleModal={toggleModal}
             setNftDetails={setNftDetails}

@@ -37,7 +37,7 @@ const Aprrove = () => {
       address: process.env.NEXT_PUBLIC_TOKEN_CA as `0x${string}`,
       abi: tokenAbi,
       functionName: "approve",
-      args: [userWalletAddress as `0x${string}`, BigInt(Number(tokenAmount))],
+      args: [userWalletAddress!, BigInt(Number(tokenAmount))],
     });
   }
 
@@ -50,7 +50,7 @@ const Aprrove = () => {
     } else {
       router.push(`/`);
     }
-  }, [isConnected, hash]);
+  }, [isConnected, hash, router, tokenAmount]);
 
   useEffect(() => {
     if (error) {

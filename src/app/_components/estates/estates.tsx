@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 // import { useRouter } from "next/navigation";
-// import Image from 'next/image';
+import Image from 'next/image';
 // import { FEATURED_ESTATES } from '../data/allLands';
 import type { nftDetails } from '~/app/creator/page';
 
@@ -39,19 +39,19 @@ const Estates = ({
             toggleModal();
           }}
         >
-          <img
+          {/* <img
             className="h-full w-full rounded-[16px] object-cover"
             // src={`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${preview}`}
             src={property.tokenURI}
             alt="property Preview"
-          ></img>
-          {/* <Image
+          ></img> */}
+          <Image
             src={property.tokenURI}
             alt="estate"
             width={500}
             height={500}
             className="h-full w-full object-cover"
-          /> */}
+          />
           <div className="absolute bottom-0 left-2 flex w-full items-center justify-between bg-gradient-to-t from-black via-transparent to-transparent px-8 py-2 text-white">
             {/* <h2 className="text-[24px]">{estate.name}</h2> */}
             <div className="flex justify-between bg-[#001f3f80] p-2 text-[14px]">
