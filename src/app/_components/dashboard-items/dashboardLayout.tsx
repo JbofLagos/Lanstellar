@@ -4,7 +4,8 @@ import DashboardNav from "./dashboardNav";
 import DashboardLeft from "./dashboardLeft";
 import { useAccount, useReadContract } from "wagmi";
 import { useRouter } from "next/navigation";
-import { verifierAbi } from "~/Constants/ABI/verifyWalletAddress";
+// import { verifierAbi } from "~/Constants/ABI/verifyWalletAddress";
+import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
 
 interface dashboardLayout {
   children?: React.ReactNode;
@@ -14,10 +15,10 @@ const DashboardLayout = ({ children, current }: dashboardLayout) => {
   const router = useRouter();
   const { address: userWalletAddress, isConnected } = useAccount();
 
-  const { data: isValid } = useReadContract({
-    address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
-    abi: verifierAbi,
-    functionName: "verify",
+  const { data: isVerified } = useReadContract({
+    address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+    abi: lanStellarAbi,
+    functionName: "getKYCStatus",
     args: [userWalletAddress as `0x${string}`],
   });
 
@@ -37,10 +38,12 @@ const DashboardLayout = ({ children, current }: dashboardLayout) => {
         <div className="bg-main hidden w-1/12 text-white xl:flex">
           <DashboardLeft current={current} />
         </div>
-        {isValid ? (
+        {isVerified ? (
           <div className="bg-color flex w-full p-4">{children}</div>
         ) : (
-          <div className="bg-color flex w-full p-4">User Not Verified</div>
+          <div className="bg-color flex w-full p-4 content-center justify-center">
+            <p className="text-[#ffffff]">User Not Verified</p>
+          </div>
         )}
       </div>
     </div>

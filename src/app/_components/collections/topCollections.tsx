@@ -6,47 +6,49 @@ import Image from 'next/image';
 // import { Funnel, SelectDown } from '~/app/assets/icons/icons';
 import { Funnel} from "~/app/assets/icons/icons";
 // import { NFTS_LAND, NETWORKS, TIMELINE } from '../data/allLands';
-import { NFTS_LAND } from "../data/allLands";
+// import { NFTS_LAND } from "../data/allLands";
 // import DashboardModal from '../modals/DashboardModal';
 
 interface TopCollectionsProps {
   setNftDetails: React.Dispatch<React.SetStateAction<nftDetails>>;
   toggleModal: () => void;
+  propertyArray: nftDetails[];
 }
 
 const TopCollections = ({
   setNftDetails,
   toggleModal,
+  propertyArray,
 }: TopCollectionsProps) => {
   // const page: number[] = [3, 6, 9, 12, 15];
 
   const rowsPerPage = 3;
 
   const [currentPage, setCurrentPage] = useState(1); // State for current page
-    const totalPages = Math.ceil(NFTS_LAND.length / rowsPerPage); // Calculate total pages
-    
-    const page = totalPages;
-    // const pageArray: number[] = [...Array(page)] as number[];
-    const pageNumber: number[] = Array.from({ length: page }, (_, i) => i + 1);
-    // const pageNumber = pageArray.map((_, i: number) => i + 1);
+  const totalPages = Math.ceil(propertyArray?.length / rowsPerPage); // Calculate total pages
+
+  const page = totalPages;
+  // const pageArray: number[] = [...Array(page)] as number[];
+  const pageNumber: number[] = Array.from({ length: page }, (_, i) => i + 1);
+  // const pageNumber = pageArray.map((_, i: number) => i + 1);
 
   // Calculate the indices for the data slice
   const startIndex = (currentPage - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
-  const currentData = NFTS_LAND.slice(startIndex, endIndex); // Slice the data for current page
+  const currentData = propertyArray?.slice(startIndex, endIndex); // Slice the data for current page
 
   // Handle pagination
-//   const handleNextPage = () => {
-//     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-//   };
+  //   const handleNextPage = () => {
+  //     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  //   };
 
-//   const handlePreviousPage = () => {
-//     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-//     };
-    
-    const handlePage = (number: number) => {
-      setCurrentPage(Math.min(number, totalPages));
-    };
+  //   const handlePreviousPage = () => {
+  //     setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  //     };
+
+  const handlePage = (number: number) => {
+    setCurrentPage(Math.min(number, totalPages));
+  };
 
   // const [modal, setModal] = useState(false);
   // const [nftDetails, setNftDetails] = useState<nftDetails>({
@@ -81,7 +83,7 @@ const TopCollections = ({
         )} */}
       <div className="flex w-full flex-col overflow-y-scroll pt-8">
         <span className="pb-1 text-[28px] font-bold text-white">
-          Top Collection
+          Listed Properties
         </span>
 
         {/* <div className='flex flex-row bg-[#1C092A] rounded-[16px] w-full p-3'>
@@ -121,7 +123,7 @@ const TopCollections = ({
               <tr className="flex w-full items-start">
                 <td className="flex flex-row gap-2 font-bold">
                   <p className="text-[20px] text-white">#</p>
-                  <p className="text-[20px] text-white">NFT Name</p>
+                  <p className="text-[20px] text-white">Property Image</p>
                 </td>
               </tr>
               <tr className="flex w-full flex-row items-end justify-end gap-20 font-bold">
@@ -140,7 +142,7 @@ const TopCollections = ({
                 </td> */}
               </tr>
             </thead>
-            {currentData.map((asset, index) => (
+            {currentData?.map((asset, index) => (
               <tbody
                 key={index}
                 className="mt-4 flex w-full cursor-pointer flex-row items-center pr-4"
@@ -154,27 +156,38 @@ const TopCollections = ({
                   <td className="flex flex-row items-center gap-2">
                     <p className="text-[16px] text-white">{index + 1}</p>
                     <div className="relative">
-                      <Image
+                      <img
+                        className="h-[35px] w-[40px] rounded-[16px]"
+                        src={asset.tokenURI}
+                        alt="Avatar Preview"
+                      ></img>
+                      {/* <Image
                         src={asset.img}
                         alt="land"
                         className="w-[40px] rounded-[8px]"
-                      />
+                      /> */}
                       {/* <Image src={asset.network} alt='eth' className='w-[16px] absolute top-[-1px] right-[-2px]' /> */}
                     </div>
 
-                    <p className="text-[16px] text-white">{asset.name}</p>
+                    {/* <p className="text-[16px] text-white">{asset.name}</p> */}
                   </td>
                 </tr>
                 <tr className="flex w-full flex-row items-end justify-end gap-20">
                   <td className="">
-                    <p className="text-[16px] text-white">{asset.attribute}</p>
+                    <p className="text-[16px] text-white">
+                      {asset.forSale ? "Yes" : "No"}
+                    </p>
                   </td>
 
                   <td className="">
-                    <p className="text-[16px] text-white">{asset.price}</p>
+                    <p className="text-[16px] text-white">
+                      {asset.price.toString()}
+                    </p>
                   </td>
                   <td className="">
-                    <p className="text-[16px] text-white">{asset.volume}</p>
+                    <p className="text-[16px] text-white">
+                      {asset.tokenId.toString()}
+                    </p>
                   </td>
                   {/* <td className="">
                     <p className="text-[16px] text-white">{asset.listed}</p>

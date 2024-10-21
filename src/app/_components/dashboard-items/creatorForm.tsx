@@ -6,7 +6,7 @@
 // import { ChevronDown, Upload } from "~/app/assets/icons/icons";
 // import DefaultButton from "../buttons/defaultButton";
 // import BaseModal from "../modals/basemodal";
-import { ConnectWallet, ConnectWalletText, Wallet, WalletDropdown, WalletDropdownDisconnect } from "@coinbase/onchainkit/wallet";
+import { ConnectWallet, Wallet, WalletDropdown, WalletDropdownDisconnect } from "@coinbase/onchainkit/wallet";
 import { Address, Avatar, Identity, Name } from "@coinbase/onchainkit/identity";
 
 interface CreatorFormProps {

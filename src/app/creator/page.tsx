@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useWriteContract,
   useWaitForTransactionReceipt, useReadContract } from "wagmi";
 import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
@@ -10,13 +10,20 @@ import TrendingNow from '../_components/trending/trending';
 import DashboardModal from '../_components/modals/DashboardModal';
 
 export interface nftDetails {
-  name: string;
-  price: string;
-  img: string;
+  tokenId: number;
+  seller: string;
+  price: number;
+  buyer: string;
+  forSale: boolean;
+  tokenURI: string;
 }
 
 
 const Creator = () => {
+
+  useEffect(() => {
+    localStorage.removeItem("token_ipfs");
+  }, []);
 
   const { data } = useReadContract({
     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
@@ -24,13 +31,16 @@ const Creator = () => {
     functionName: "getListedProperties",
   });
 
-  console.log("propertiesdata:", data);
+  // console.log("propertiesdata:", data);
 
   const [modal, setModal] = useState(false);
-  const [nftDetails, setNftDetails] = useState<nftDetails>({
-    name: "",
-    price: "",
-    img: ""
+  const [nftDetails, setNftDetails] = useState({
+    tokenId: 0,
+    seller: "",
+    price: 2,
+    buyer: "",
+    forSale: true,
+    tokenURI: "",
   });
   function toggleModal() {
     setModal(!modal);
@@ -72,16 +82,22 @@ const Creator = () => {
           Welcome to Lanstellar
         </span>
         <div className=" ">
-          <Estates toggleModal={toggleModal} setNftDetails={setNftDetails} />
+          <Estates
+            propertyArray={data}
+            toggleModal={toggleModal}
+            setNftDetails={setNftDetails}
+          />
         </div>
         <div>
           <TopCollections
+            propertyArray={data}
             toggleModal={toggleModal}
             setNftDetails={setNftDetails}
           />
         </div>
         <div className="mt-10">
           <TrendingNow
+            propertyArray={data}
             toggleModal={toggleModal}
             setNftDetails={setNftDetails}
           />

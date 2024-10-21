@@ -1,15 +1,20 @@
 import React from 'react'
 import Image from 'next/image';
-import { TRENDING_LANDS } from '../data/allLands'
+// import { TRENDING_LANDS } from '../data/allLands'
 import { Trending } from '~/app/assets/icons/icons';
 import type { nftDetails } from '~/app/creator/page';
 
 interface TrendingNowProps {
   setNftDetails: React.Dispatch<React.SetStateAction<nftDetails>>;
   toggleModal: () => void;
+  propertyArray: nftDetails[];
 }
 
-const TrendingNow = ({ setNftDetails, toggleModal }: TrendingNowProps) => {
+const TrendingNow = ({
+  setNftDetails,
+  toggleModal,
+  propertyArray,
+}: TrendingNowProps) => {
   return (
     <div className="flex flex-col">
       <span className="py-8 text-[28px] font-bold text-white">
@@ -17,7 +22,7 @@ const TrendingNow = ({ setNftDetails, toggleModal }: TrendingNowProps) => {
       </span>
 
       <div className="scrollbar-hide flex snap-x snap-mandatory flex-row items-center gap-8 overflow-x-scroll py-8">
-        {TRENDING_LANDS.map((trending, index) => (
+        {propertyArray?.map((trending, index) => (
           <div
             key={index}
             className="relative h-full min-w-[25%] cursor-pointer snap-center overflow-hidden rounded-[16px]"
@@ -27,15 +32,20 @@ const TrendingNow = ({ setNftDetails, toggleModal }: TrendingNowProps) => {
             }}
           >
             <div className="flex w-full flex-col rounded-[16px] bg-[#1C092A] p-4">
-              <Image
-                src={trending.img}
+              {/* <Image
+                src={trending.tokenURI}
                 alt="image"
                 className="h-[350px] w-full rounded-[16px] object-cover"
-              />
+              /> */}
+              <img
+                className="h-[350px] w-full rounded-[16px] object-cover"
+                src={trending.tokenURI}
+                alt="Avatar Preview"
+              ></img>
               <div className="flex flex-row items-center gap-2 py-4">
-                <span className="text-[24px] font-semibold text-white">
+                {/* <span className="text-[24px] font-semibold text-white">
                   {trending.name}
-                </span>
+                </span> */}
                 <span>
                   <Trending />
                 </span>
@@ -51,7 +61,7 @@ const TrendingNow = ({ setNftDetails, toggleModal }: TrendingNowProps) => {
                     Price
                   </span>
                   <span className="text-[20px] font-bold text-white">
-                    {trending.price}
+                    {trending.price.toString()}
                   </span>
                 </div>
               </div>

@@ -52,12 +52,12 @@ const { data: isValid } = useReadContract({
   useEffect(() => {
     if (isConnected && userWalletAddress) {
       if (isValid) {
-        return router.push(`/creator`);
+        return router.push(`/verify-kyc`);
       } else {
         return router.push(`/creator-registration`);
       }
     }
-  }, [isConnected, userWalletAddress]);
+  }, [isConnected, userWalletAddress, isValid]);
   return (
     <div className="flex h-screen flex-col">
       <div className="fixed z-10 h-[88px] w-full">

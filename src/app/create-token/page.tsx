@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import DashboardLayout from "../_components/dashboard-items/dashboardLayout";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Upload } from "../assets/icons/icons";
 import { type BaseError, useWriteContract } from "wagmi";
@@ -16,33 +16,25 @@ import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
 
 const CreateToken = () => {
   const router = useRouter();
-  const [state, setState] = useState({
-    tokenId: "",
-    tokenName: "",
-    tokenPrice: "",
-  });
+  const [tokenPrice, setTokenPrice] = useState("");
 
-  const [tokenDesc, setTokenDesc] = useState("");
-  function handleTextAreaChange(
-    evt: React.ChangeEvent<HTMLTextAreaElement>,
-  ) {
-    const value = evt.target.value;
-    setTokenDesc(value);
-  }
+  // const [tokenDesc, setTokenDesc] = useState<File | undefined>(undefined);
+  // function handleDescFileUpload(event: React.ChangeEvent<HTMLInputElement>) {
+  //   const value = event?.target?.files?.[0] && event?.target?.files;
+  //   if (value) {
+  //     const fileURL: any = event?.target?.files?.[0];
+  //     setTokenDesc(fileURL);
+  //   }
+  // }
 
-  function handleChange(
-    evt: React.ChangeEvent<HTMLInputElement>
-  ) {
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
     const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value,
-    });
+    setTokenPrice(value);
   }
 
   const [preview, setPreview] = useState<string | null>(null);
   const [tokenImage, setTokenImage] = useState<File | undefined>(undefined);
-  // console.log("preview:", preview);
+  // const [tokenImage, setTokenImage] = useState<File | undefined>(undefined);
 
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -58,21 +50,21 @@ const CreateToken = () => {
     }
   };
 
-
-    // tokenId: any,
-    // tokenName: string,
-// tokenDesc: string,
-  
-  async function handlePinataUpload(fileURL: File | undefined) {
-
+  async function handlePinataUpload(
+    // docFile: File | undefined,
+    imageFile: File | undefined,
+  ) {
     try {
       const formData: any = new FormData();
-      formData.append("file", fileURL);
-      const metaData = JSON.stringify({
-        name: "file Name",
-      });
-      formData.append("pinataMetadata", metaData);
+     
+      // formData.append("file", docFile, docFile?.name);
+      formData.append("file", imageFile, imageFile?.name);
+      // const metaData = JSON.stringify({
+      //   name: "lanstellar token documents",
+      // });
+      // formData.append("pinataMetadata", metaData);
       const response = await fetch(
+        // "https://uploads.pinata.cloud/v3/files",
         "https://api.pinata.cloud/pinning/pinFileToIPFS",
         {
           method: "POST",
@@ -86,68 +78,33 @@ const CreateToken = () => {
       const responseData = await response.json();
       // setPreview(responseData.IpfsHash);
 
-      const imageUrl = `https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${responseData.IpfsHash}`;
-      return imageUrl;
-
-      // const metaData = JSON.stringify({
-      //   tokenId,
-      //   tokenName,
-      //   tokenDesc,
-      //   image: imageUrl,
-      // });
-
-      // const metadataUploadResponse = await fetch(
-      //   "https://api.pinata.cloud/pinning/pinJSONToIPFS",
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_PINATA_JWT}`,
-      //     },
-      //     body: metaData,
-      //   },
-      // );
-      // const respDataTokenUri = await metadataUploadResponse.json();
-      // return respDataTokenUri.IpfsHash;
+      const documentUrl = `https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${responseData.IpfsHash}`;
+      return documentUrl;
     } catch {
       alert("Trouble uploading file");
     }
   }
 
-  // const [desc, setDesc] = useState<File | null>(null);
-  // const handleDescFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
-  //   if (file) {
-  //     setDesc(file);
-  //   }
-  // };
-
   const { data: hash, isPending, error, writeContract } = useWriteContract();
 
   async function handleCreateToken() {
-    const tokenUriRespData = await handlePinataUpload(
-      tokenImage,
-      // state.tokenId,
-      // state.tokenName,
-      // tokenDesc,
-    );
+    // tokenDesc, 
+    const tokenUriRespData = await handlePinataUpload(tokenImage);
+    localStorage.setItem("token_ipfs", tokenUriRespData as string);
     // console.log("tokenUriRespData:", tokenUriRespData);
-    // const tokenURI = `https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${tokenUriRespData}`;
     writeContract({
       address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
       abi: lanStellarAbi,
       functionName: "createToken",
-      args: [tokenUriRespData as string, BigInt(Number(state.tokenPrice))],
+      args: [tokenUriRespData as string, BigInt(Number(tokenPrice))],
     });
   }
 
   useEffect(() => {
     if (hash) {
-      setState({
-        tokenId: "",
-        tokenName: "",
-        tokenPrice: ""
-      });
-      router.push(`/creator`);
+      setTokenPrice("");
+      // setTokenDesc(undefined);
+      router.push(`/list-property`);
     }
   }, [hash]);
 
@@ -156,15 +113,6 @@ const CreateToken = () => {
       alert((error as BaseError).shortMessage || error.message);
     }
   }, [error]);
-
-  // console.log("error:", error);
-
-  // console.log("hash:", hash, "error:", error, "isPending:", isPending);
-
-  // const { isLoading: isConfirming, isSuccess: isConfirmed } =
-  //   useWaitForTransactionReceipt({
-  //     hash,
-  //   });
 
   return (
     <DashboardLayout current={3}>
@@ -208,61 +156,29 @@ const CreateToken = () => {
           <div className="w-full px-32">
             <div className="mb-5 w-full">
               <label className="mb-2 block text-[20px] text-sm font-normal text-gray-300">
-                ID
-              </label>
-              <input
-                className="block w-full appearance-none rounded border-2 border-gray-500 bg-transparent pl-2 leading-8 text-gray-300 placeholder:text-[13px] focus:border-white focus:outline-none"
-                type="text"
-                name="tokenId"
-                value={state.tokenId}
-                onChange={handleChange}
-                placeholder="4"
-                autoComplete="off"
-              />
-            </div>
-            <div className="mb-5 w-full">
-              <label className="mb-2 block text-[20px] text-sm font-normal text-gray-300">
-                Name
-              </label>
-              <input
-                className="block w-full appearance-none rounded border-2 border-gray-500 bg-transparent pl-2 leading-8 text-gray-300 placeholder:text-[13px] focus:border-white focus:outline-none"
-                type="text"
-                name="tokenName"
-                value={state.tokenName}
-                onChange={handleChange}
-                placeholder="Land"
-                autoComplete="off"
-              />
-            </div>
-            <div className="mb-5 w-full">
-              <label className="mb-2 block text-[20px] text-sm font-normal text-gray-300">
                 Price
               </label>
               <input
                 className="block w-full appearance-none rounded border-2 border-gray-500 bg-transparent pl-2 leading-8 text-gray-300 placeholder:text-[13px] focus:border-white focus:outline-none"
                 type="text"
                 name="tokenPrice"
-                value={state.tokenPrice}
+                value={tokenPrice}
                 onChange={handleChange}
                 placeholder="20"
                 autoComplete="off"
               />
             </div>
-            <div className="mb-5 w-full">
+            {/* <div className="mb-5 w-full">
               <label className="mb-2 block text-[20px] text-sm font-normal text-gray-300">
                 Description
               </label>
-              <textarea
-                // type="text"
-                rows={3}
-                value={tokenDesc}
-                onChange={handleTextAreaChange}
-                className="block w-full appearance-none rounded border-2 border-gray-500 bg-transparent pl-2 leading-8 text-gray-300 placeholder:text-[13px] focus:border-white focus:outline-none"
-                // accept=".docx"
-                // className="hidden"
-                // onChange={handleChange}
-              ></textarea>
-            </div>
+              <input
+                type="file"
+                onChange={handleDescFileUpload}
+                className="block w-full appearance-none rounded border-2 border-gray-500 bg-transparent leading-8 text-gray-300 placeholder:text-[13px] focus:border-white focus:outline-none"
+                accept=".docx"
+              />
+            </div> */}
           </div>
         </div>
 
@@ -270,20 +186,7 @@ const CreateToken = () => {
           <button
             className="flex w-full items-center justify-center rounded-[16px] bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black disabled:bg-yellow-700"
             onClick={handleCreateToken}
-            disabled={
-              isPending ||
-              !state.tokenPrice ||
-              !preview
-            }
-
-            // disabled={
-            //   isPending ||
-            //   !state.tokenId ||
-            //   !state.tokenName ||
-            //   !state.tokenPrice ||
-            //   !tokenDesc ||
-            //   !preview
-            // }
+            disabled={isPending || !tokenPrice || !preview}
           >
             Create
           </button>

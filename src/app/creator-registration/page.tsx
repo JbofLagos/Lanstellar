@@ -6,6 +6,7 @@ import CreatorForm from "../_components/dashboard-items/creatorForm";
 import {
   type BaseError,
   useAccount,
+  useReadContract,
   useWriteContract,
   // useWaitForTransactionReceipt,
 } from "wagmi";
@@ -23,6 +24,13 @@ const CreatorRegistration = () => {
   //     router.push(`/`);
   //   }
   // }, [isConnected]);
+
+  const { data: isValid } = useReadContract({
+    address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
+    abi: verifierAbi,
+    functionName: "verify",
+    args: [userWalletAddress as `0x${string}`],
+  });
 
 
   const { data: hash, isPending, error, writeContract } = useWriteContract();
@@ -47,7 +55,7 @@ const CreatorRegistration = () => {
   useEffect(() => {
     if (isConnected) {
       if (hash) {
-        router.push(`/creator`);
+        router.push(`/approve`);
       }
     } else {
       router.push(`/`);
@@ -80,7 +88,7 @@ const CreatorRegistration = () => {
           <CreatorLeft />
         </div>
         <div className="bg-color w-full content-center p-4">
-          <CreatorForm verifyAddress={verifyAddress} confirming={isPending} />
+          {isValid ? <p className="text-[#ffffff]">You have been Verified</p> : <CreatorForm verifyAddress={verifyAddress} confirming={isPending} />}
         </div>
       </div>
     </div>
