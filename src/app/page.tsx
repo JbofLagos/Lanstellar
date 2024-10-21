@@ -23,7 +23,7 @@ const { data: isValid } = useReadContract({
   address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
   abi: verifierAbi,
   functionName: "verify",
-  args: [userWalletAddress as `0x${string}`],
+  args: [userWalletAddress!],
 });
 
   // function checkIfUserIsVerified() {
@@ -57,7 +57,7 @@ const { data: isValid } = useReadContract({
         return router.push(`/creator-registration`);
       }
     }
-  }, [isConnected, userWalletAddress, isValid]);
+  }, [isConnected, userWalletAddress, isValid, router]);
   return (
     <div className="flex h-screen flex-col">
       <div className="fixed z-10 h-[88px] w-full">

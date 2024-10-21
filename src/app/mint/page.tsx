@@ -38,7 +38,7 @@ const Mint = () => {
       address: process.env.NEXT_PUBLIC_TOKEN_CA as `0x${string}`,
       abi: tokenAbi,
       functionName: "mint",
-      args: [userWalletAddress as `0x${string}`, BigInt(Number(tokenAmount))],
+      args: [userWalletAddress!, BigInt(Number(tokenAmount))],
     });
   }
 
@@ -50,7 +50,7 @@ const Mint = () => {
     } else {
       router.push(`/`);
     }
-  }, [isConnected, hash]);
+  }, [isConnected, hash, router]);
 
   useEffect(() => {
     if (error) {

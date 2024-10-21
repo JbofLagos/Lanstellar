@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../_components/navbar/navbar";
 import CreatorLeft from "../_components/dashboard-items/creatorLeft";
 import { type BaseError, useAccount, useWriteContract } from "wagmi";
@@ -40,7 +40,7 @@ const VerifyKyc = () => {
     } else {
       router.push(`/`);
     }
-  }, [isConnected, hash]);
+  }, [isConnected, router, hash]);
 
   useEffect(() => {
     if (error) {

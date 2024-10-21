@@ -3,7 +3,7 @@ import React from 'react'
 import { useRouter } from "next/navigation";
 import Image from 'next/image';
 // import Lanstellerlogonew from "../../assets/images/lanstellarlogonew.png";
-import lanstellarlogonew from "../../assets/images/lanstellarlogonew.png"
+// import lanstellarlogonew from "../../assets/images/lanstellarlogonew.png"
 
 const Navbar = () => {
   const router = useRouter();

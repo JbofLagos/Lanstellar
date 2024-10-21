@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import DashboardLayout from "../_components/dashboard-items/dashboardLayout";
 // import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Upload } from "../assets/icons/icons";
+// import { Upload } from "../assets/icons/icons";
 import { type BaseError, useWriteContract } from "wagmi";
 import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
 
@@ -21,9 +21,11 @@ const ListProperty = () => {
 
     useEffect(() => {
       if (localStorage.getItem("token_ipfs")) {
-        setTokenIpfs(localStorage.getItem("token_ipfs") as string);
+        setTokenIpfs(localStorage.getItem("token_ipfs")!);
+      } else {
+        router.push(`/create-token`);
       }
-    }, []);
+    }, [router]);
      
   const [tokenId, setTokenId] = useState("");
   const [tokenPrice, setTokenPrice] = useState("");
@@ -45,7 +47,7 @@ const ListProperty = () => {
       address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
       abi: lanStellarAbi,
       functionName: "listNewProperty",
-      args: [BigInt(Number(tokenId)), BigInt(Number(tokenPrice)), tokenIpfs as string],
+      args: [BigInt(Number(tokenId)), BigInt(Number(tokenPrice)), tokenIpfs],
     });
   }
 
@@ -55,7 +57,7 @@ const ListProperty = () => {
       setTokenId("");
       router.push(`/creator`);
     }
-  }, [hash]);
+  }, [hash, router]);
 
   useEffect(() => {
     if (error) {

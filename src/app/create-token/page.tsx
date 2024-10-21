@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 import { useState, useEffect } from "react";
 import DashboardLayout from "../_components/dashboard-items/dashboardLayout";
-// import Image from "next/image";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Upload } from "../assets/icons/icons";
 import { type BaseError, useWriteContract } from "wagmi";
@@ -39,14 +40,14 @@ const CreateToken = () => {
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const file = event?.target?.files?.[0] && event?.target?.files;
+    // @ts-expect-error not needed
+    const file: File | null = event.target.files ? event.target.files[0] : null;
     if (file) {
-      const fileURL: any = event?.target?.files?.[0];
-      // const fileURLForimage = event?.target?.files?.[0];
-      setTokenImage(fileURL);
-      // await handlePinataUpload(fileURL);
-      const file = URL.createObjectURL(fileURL);
-      setPreview(file);
+      // const fileURL: File = event?.target?.files?.[0];
+
+      setTokenImage(file);
+      const prevFile = URL.createObjectURL(file);
+      setPreview(prevFile);
     }
   };
 
@@ -55,16 +56,10 @@ const CreateToken = () => {
     imageFile: File | undefined,
   ) {
     try {
-      const formData: any = new FormData();
-     
-      // formData.append("file", docFile, docFile?.name);
+      const formData = new FormData();
+      // @ts-expect-error not needed
       formData.append("file", imageFile, imageFile?.name);
-      // const metaData = JSON.stringify({
-      //   name: "lanstellar token documents",
-      // });
-      // formData.append("pinataMetadata", metaData);
       const response = await fetch(
-        // "https://uploads.pinata.cloud/v3/files",
         "https://api.pinata.cloud/pinning/pinFileToIPFS",
         {
           method: "POST",
@@ -74,11 +69,9 @@ const CreateToken = () => {
           body: formData,
         },
       );
-      // await response.json();
       const responseData = await response.json();
-      // setPreview(responseData.IpfsHash);
-
-      const documentUrl = `https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${responseData.IpfsHash}`;
+      const { IpfsHash } = responseData;
+      const documentUrl = `https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${IpfsHash}`;
       return documentUrl;
     } catch {
       alert("Trouble uploading file");
@@ -88,15 +81,15 @@ const CreateToken = () => {
   const { data: hash, isPending, error, writeContract } = useWriteContract();
 
   async function handleCreateToken() {
-    // tokenDesc, 
+    // tokenDesc,
     const tokenUriRespData = await handlePinataUpload(tokenImage);
-    localStorage.setItem("token_ipfs", tokenUriRespData as string);
+    localStorage.setItem("token_ipfs", tokenUriRespData!);
     // console.log("tokenUriRespData:", tokenUriRespData);
     writeContract({
       address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
       abi: lanStellarAbi,
       functionName: "createToken",
-      args: [tokenUriRespData as string, BigInt(Number(tokenPrice))],
+      args: [tokenUriRespData!, BigInt(Number(tokenPrice))],
     });
   }
 
@@ -106,7 +99,7 @@ const CreateToken = () => {
       // setTokenDesc(undefined);
       router.push(`/list-property`);
     }
-  }, [hash]);
+  }, [hash, router]);
 
   useEffect(() => {
     if (error) {
@@ -126,21 +119,20 @@ const CreateToken = () => {
             <div className="mt-3 flex h-[308px] w-[522px] items-center justify-center rounded-[16px] bg-[#2F1145]">
               <label className="flex h-full w-full cursor-pointer items-center justify-center">
                 {preview ? (
-                  // <Image
-                  //   src={`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${preview}`}
-                  //   alt="Avatar Preview"
-                  //   width={300}
-                  //   height={300}
-                  //   className="h-full w-full rounded-[16px] object-cover"
-                  // />
-
-                  <img
-                    className="h-full w-full rounded-[16px] object-cover"
-                    // src={`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${preview}`}
+                  <Image
                     src={preview}
                     alt="Avatar Preview"
-                  ></img>
+                    width={300}
+                    height={300}
+                    className="h-full w-full rounded-[16px] object-cover"
+                  />
                 ) : (
+                  // <img
+                  //   className="h-full w-full rounded-[16px] object-cover"
+                  //   // src={`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${preview}`}
+                  //   src={preview}
+                  //   alt="Avatar Preview"
+                  // ></img>
                   <Upload />
                 )}
                 <input
