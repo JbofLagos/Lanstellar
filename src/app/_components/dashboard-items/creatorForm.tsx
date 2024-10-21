@@ -1,270 +1,406 @@
 "use client";
-import { useState } from 'react'
-import { useRouter } from "next/navigation";
-import Image from 'next/image';
-import { ChevronDown, Upload } from '~/app/assets/icons/icons'
-import DefaultButton from '../buttons/defaultButton';
-import BaseModal from '../modals/basemodal';
+// import { useEffect } from "react";
+// import { useRouter } from "next/navigation";
+// import { useForm } from "react-hook-form";
+// import Image from "next/image";
+// import { ChevronDown, Upload } from "~/app/assets/icons/icons";
+// import DefaultButton from "../buttons/defaultButton";
+// import BaseModal from "../modals/basemodal";
+import { ConnectWallet, Wallet, WalletDropdown, WalletDropdownDisconnect } from "@coinbase/onchainkit/wallet";
+import { Address, Avatar, Identity, Name } from "@coinbase/onchainkit/identity";
 
-const CreatorForm = () => {
-    const router = useRouter();
-    const [accountCreated, setAccountCreated] = useState(false);
-
-    const [preview, setPreview] = useState<string | null>(null);
-
-    const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (file) {
-            const fileURL = URL.createObjectURL(file);
-            setPreview(fileURL);
-        }
-    };
-
-
-    const [text, setText] = useState('');
-    const maxLength = 2500;
-    return (
-        <div className='w-full overflow-y-scroll '>
-            <div className='flex flex-row p-10 w-full '>
-                <div className='flex flex-col gap-10 w-8/12'>
-                    <div className='flex flex-col'>
-                        <span className='text-[#FFD000] text-[24px]'>Personal Information</span>
-
-                        <div className="grid grid-cols-2 w-full gap-20 mt-8">
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-8" htmlFor="first-name">
-                                    First Name
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300  border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="first-name"
-                                    type="text"
-
-                                />
-                            </div>
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-8" htmlFor="last-name">
-                                    Last Name
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300 border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="last-name"
-                                    type="text"
-                                />
-                            </div>
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-8" htmlFor="email">
-                                    Email
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300 border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="email"
-                                    type="email"
-                                />
-                            </div>
-
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-8" htmlFor="phone-number">
-                                    Phone Number
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300 border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="phone-number"
-                                    type="text"
-
-                                />
-                            </div>
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-8" htmlFor="country">
-                                    Location
-                                </label>
-                                <div className="relative">
-                                    <select
-                                        className="block appearance-none w-full bg-transparent text-gray-300 text-[16px] font-light border-b-2 border-white py-3 px-4 pr-8 leading-8 focus:outline-none focus:border-white"
-                                        id="country"
-                                    >
-                                        <option>Country</option>
-                                        <option>Nigeria</option>
-                                        <option>Ghana</option>
-                                        <option>Kenya</option>
-                                    </select>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
-                                        <ChevronDown />
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-8" htmlFor="city">
-                                    City
-                                </label>
-                                <div className="relative">
-                                    <select
-                                        className="block appearance-none w-full bg-transparent text-gray-300 text-[16px] font-light border-b-2 border-white py-3 px-4 pr-8 leading-8 focus:outline-none focus:border-white"
-                                        id="city"
-                                    >
-                                        <option>State or city</option>
-                                        <option>Lagos</option>
-                                        <option>Accra</option>
-                                        <option>Nairobi</option>
-                                    </select>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
-                                        <ChevronDown />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="w-full mt-20">
-                            <label className="block text-gray-300 text-sm font-normal text-[20px] mb-8" htmlFor="postal-code">
-                                Postal Code
-                            </label>
-                            <input
-                                className="appearance-none block w-full bg-transparent text-gray-300 border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                id="postal-code"
-                                type="text"
-                            />
-                        </div>
-                        <div className="w-full mt-20">
-                            <label className="block text-gray-300 text-sm font-normal text-[20px] mb-2" htmlFor="postal-code">
-                                Bio
-                            </label>
-                            <textarea
-                                id="bio"
-                                name="bio"
-                                maxLength={maxLength}
-                                value={text}
-                                onChange={(e) => setText(e.target.value)}
-                                className="appearance-none block w-full bg-transparent text-gray-300 border border-white rounded-lg py-8 px-4 leading-tight focus:outline-none focus:border-white"
-                                // rows="6"
-                                placeholder="0/2500"
-                            />
-                            {/* <div className="absolute bottom-2 right-2 text-gray-300 text-sm">
-                            {text.length}/{maxLength}
-                        </div> */}
-                        </div>
-                    </div>
-
-                    <div className='flex flex-col mt-20'>
-                        <span className='text-[#FFD000] text-[24px]'>Professional Details:</span>
-
-                        <div className="grid grid-cols-2 w-full gap-20 py-8">
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-4" htmlFor="first-name">
-                                    LinkedIn link (Optional)
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300  border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="linkedin"
-                                    type="text"
-
-                                />
-                            </div>
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-4" htmlFor="last-name">
-                                    Company link
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300 border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="company"
-                                    type="text"
-                                />
-                            </div>
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-4" htmlFor="email">
-                                    X link (Optional)
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300 border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="x"
-                                    type="text"
-                                />
-                            </div>
-
-
-                            <div className="w-full">
-                                <label className="block text-gray-300 text-sm font-normal text-[20px] mb-4" htmlFor="phone-number">
-                                    Portfolio link (Optional)
-                                </label>
-                                <input
-                                    className="appearance-none block w-full bg-transparent text-gray-300 border-b-2 text-[18px] border-white leading-8 focus:outline-none focus:border-white"
-                                    id="portfolio"
-                                    type="text"
-
-                                />
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                <div className='flex flex-col gap-4 w-3/12 fixed right-8'>
-                    <span className='text-[20px] text-white mt-14'>Upload your avatar</span>
-                    <div className='w-[422px] h-[308px] bg-[#2F1145] rounded-[16px] items-center flex justify-center'>
-                        <label className="cursor-pointer w-full h-full flex items-center justify-center">
-                            {preview ? (
-                                <Image
-                                    src={preview}
-                                    alt="Avatar Preview"
-                                    width={300}  
-                                    height={300} 
-                                    className="w-full h-full object-cover rounded-[16px]"
-                                />
-                            ) : (
-                                <Upload />
-                            )}
-                            <input type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
-                        </label>
-                    </div>
-                    <div className='w-11/12 flex justify-center items-center ml-2 mt-4'>
-                        <DefaultButton
-                            addClass='w-6/12'
-                            className="default-btn"
-                            to=""
-                        >
-                            Upload
-                        </DefaultButton>
-                    </div>
-                </div>
-
-
-
-            </div>
-
-            <div className='w-3/12 flex items-center justify-center mx-auto py-20'>
-                <div className='flex px-8 w-full items-center justify-center py-3 bg-[#FFD000] rounded-[16px] text-black font-bold text-[20px] cursor-pointer' onClick={() => setAccountCreated(true)}>
-                    Create Account
-                </div>
-                {/* <DefaultButton
-                    addClass='w-6/12'
-                    className="default-btn"
-                    to={() => setAccountCreated(true)}
-                >
-                    Create Account
-                </DefaultButton> */}
-            </div>
-
-
-
-            <BaseModal open={accountCreated}
-                setOpen={setAccountCreated}
-                className="top-0 bottom-0 justify-center items-center mx-auto my-auto special-index  flex xl:w-[450px] h-[300px] rounded-[16px] w-full">
-                <div className='flex flex-col gap-8 w-full justify-center'>
-                    <div className='text-[20px]'>Account Created Successfully</div>
-                    <div className='px-2 w-8/12 justify-center items-center flex mx-auto rounded-[8px] py-4 bg-[#FFD000] cursor-pointer text-[#000] text-[16px]' onClick={() => router.push(`/creator`)}>
-                        Proceed
-                    </div>
-                </div>
-            </BaseModal>
-        </div>
-    )
+interface CreatorFormProps {
+  verifyAddress: () => void;
+  confirming: boolean;
 }
 
-export default CreatorForm
+const CreatorForm = ({ verifyAddress, confirming }: CreatorFormProps) => {
+  // const router = useRouter();
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors, isValid },
+  // } = useForm({
+  //   mode: "onChange",
+  // });
+  // const [accountCreated, setAccountCreated] = useState(false);
+
+  // const [preview, setPreview] = useState<string | null>(null);
+
+  // const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files?.[0];
+  //   if (file) {
+  //     const fileURL = URL.createObjectURL(file);
+  //     setPreview(fileURL);
+  //   }
+  // };
+
+  // const maxLength = 2500;
+  return (
+    <div className="w-full">
+      {/* <div className="flex w-full gap-10 px-1 py-3">
+        <div className="flex h-[530px] w-8/12 flex-col gap-10 overflow-y-scroll">
+          <div className="flex flex-col">
+            <span className="text-[24px] text-[#FFD000]">
+              Personal Information
+            </span>
+
+            <div className="mt-8 grid w-full grid-cols-2 gap-20">
+              <div className="w-full">
+                <label
+                  className="mb-8 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="first-name"
+                >
+                  First Name
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="first-name"
+                  type="text"
+                  autoComplete="off"
+                  {...register("first_name", {
+                    required: "Please enter first name",
+                  })}
+                />
+                {errors.first_name && (
+                  <p className="mt-2 text-red-600">
+                    {errors.first_name?.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-8 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="last-name"
+                >
+                  Last Name
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="last-name"
+                  type="text"
+                  autoComplete="off"
+                  {...register("last_name", {
+                    required: "Please enter Last name",
+                  })}
+                />
+                {errors.last_name && (
+                  <p className="mt-2 text-red-600">
+                    {errors.last_name?.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-8 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="email"
+                  type="email"
+                  autoComplete="off"
+                  {...register("email", {
+                    required: "Please enter email",
+                    pattern: {
+                      value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                      message: "Email address must be a valid address",
+                    },
+                  })}
+                />
+                {errors.email && (
+                  <p className="mt-2 text-red-600">{errors.email?.message}</p>
+                )}
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-8 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="phone-number"
+                >
+                  Phone Number
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="phone-number"
+                  type="text"
+                  autoComplete="off"
+                  {...register("phone", {
+                    required: "Please phone number",
+                    pattern: {
+                      value: /^([0|+[0-9]{1,5})?([0-9]{10})$/,
+                      message: "Invalid phone number",
+                    },
+                  })}
+                />
+                {errors.phone && (
+                  <p className="mt-2 text-red-600">{errors.phone?.message}</p>
+                )}
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-8 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="country"
+                >
+                  Location
+                </label>
+                <div className="relative">
+                  <select
+                    className="block w-full appearance-none border-b-2 border-white bg-transparent px-4 py-3 pr-8 text-[16px] font-light leading-8 text-gray-300 focus:border-white focus:outline-none"
+                    id="country"
+                    placeholder="select a country"
+                    {...register("country", {
+                      required: "select a country",
+                    })}
+                  >
+                    <option>Nigeria</option>
+                    <option>Ghana</option>
+                    <option>Kenya</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
+                    <ChevronDown />
+                  </div>
+                </div>
+                {errors.country && (
+                  <p className="mt-2 text-red-600">{errors.country?.message}</p>
+                )}
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-8 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="city"
+                >
+                  City
+                </label>
+                <div className="relative">
+                  <select
+                    className="block w-full appearance-none border-b-2 border-white bg-transparent px-4 py-3 pr-8 text-[16px] font-light leading-8 text-gray-300 focus:border-white focus:outline-none"
+                    id="city"
+                    {...register("state", {
+                      required: "select a state",
+                    })}
+                  >
+                    <option>Lagos</option>
+                    <option>Accra</option>
+                    <option>Nairobi</option>
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-300">
+                    <ChevronDown />
+                  </div>
+                </div>
+              </div>
+              {errors.state && (
+                <p className="mt-2 text-red-600">{errors.state?.message}</p>
+              )}
+            </div>
+
+            <div className="mt-20 w-full">
+              <label
+                className="mb-8 block text-[20px] text-sm font-normal text-gray-300"
+                htmlFor="postal-code"
+              >
+                Postal Code
+              </label>
+              <input
+                className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                id="postal-code"
+                type="text"
+                autoComplete="off"
+                {...register("pcode", {
+                  required: false,
+                })}
+              />
+            </div>
+            <div className="mt-20 w-full">
+              <label
+                className="mb-2 block text-[20px] text-sm font-normal text-gray-300"
+                htmlFor="postal-code"
+              >
+                Bio
+              </label>
+              <textarea
+                id="bio"
+                // name="bio"
+                // maxLength={maxLength}
+                // value={text}
+                // onChange={(e) => setText(e.target.value)}
+                autoComplete="off"
+                {...register("bio", {
+                  required: "Please enter bio",
+                  maxLength: {
+                    value: 2500,
+                    message: "you cannot enter more than 2500 words",
+                  },
+                })}
+                className="block w-full appearance-none rounded-lg border border-white bg-transparent px-4 py-8 leading-tight text-gray-300 focus:border-white focus:outline-none"
+                // rows="6"
+                placeholder="0/2500"
+              />
+              <div className="mt-2 text-sm text-gray-300">
+                {watch("bio") ? watch("bio").length : 0}/{maxLength}
+              </div>
+            </div>
+            {errors.bio && (
+              <p className="mt-2 text-red-600">{errors.bio?.message}</p>
+            )}
+          </div>
+
+          <div className="mt-20 flex flex-col">
+            <span className="text-[24px] text-[#FFD000]">
+              Professional Details:
+            </span>
+
+            <div className="grid w-full grid-cols-2 gap-20 py-8">
+              <div className="w-full">
+                <label
+                  className="mb-4 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="first-name"
+                >
+                  LinkedIn link (Optional)
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="linkedin"
+                  type="text"
+                  autoComplete="off"
+                  {...register("linkedin")}
+                />
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-4 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="last-name"
+                >
+                  Company link
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="company"
+                  type="text"
+                  autoComplete="off"
+                  {...register("company_link", {
+                    required: "Please enter company link",
+                  })}
+                />
+                {errors.company_link && (
+                  <p className="mt-2 text-red-600">
+                    {errors.company_link?.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-4 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="email"
+                >
+                  X link (Optional)
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="x"
+                  type="text"
+                  autoComplete="off"
+                  {...register("x_link")}
+                />
+              </div>
+
+              <div className="w-full">
+                <label
+                  className="mb-4 block text-[20px] text-sm font-normal text-gray-300"
+                  htmlFor="phone-number"
+                >
+                  Portfolio link (Optional)
+                </label>
+                <input
+                  className="block w-full appearance-none border-b-2 border-white bg-transparent text-[18px] leading-8 text-gray-300 focus:border-white focus:outline-none"
+                  id="portfolio"
+                  type="text"
+                  autoComplete="off"
+                  {...register("portfolio_link")}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span className="text-[17px] text-white">
+            Click the icon to Upload your avatar
+          </span>
+          <div className="mt-3 flex h-[308px] w-[422px] items-center justify-center rounded-[16px] bg-[#2F1145]">
+            <label className="flex h-full w-full cursor-pointer items-center justify-center">
+              {preview ? (
+                <Image
+                  src={preview}
+                  alt="Avatar Preview"
+                  width={300}
+                  height={300}
+                  className="h-full w-full rounded-[16px] object-cover"
+                />
+              ) : (
+                <Upload />
+              )}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleFileUpload}
+              />
+            </label>
+          </div>
+        </div>
+      </div> */}
+
+      <div className="mx-auto w-3/12 flex-col justify-center">
+        <Wallet>
+          <ConnectWallet className="border border-[#fff] bg-[#230C33] px-32 py-7 hover:bg-[#230c33]">
+            <Avatar className="h-6 w-6" />
+            <Name />
+          </ConnectWallet>
+          <WalletDropdown className="bg-gray-300">
+            <Identity className="px-4 pb-2 pt-3" hasCopyAddressOnClick>
+              <Avatar />
+              <Name className="text-[#fff]" />
+              <Address className="text-[#fff]" />
+            </Identity>
+            <WalletDropdownDisconnect className="bg-[#FFD000] stroke-[#230C33] stroke-2 font-bold text-[#230C33] hover:bg-[#FFD000]" />
+          </WalletDropdown>
+        </Wallet>
+        <button
+          className="mt-5 flex w-[26vw] items-center justify-center rounded-[16px] bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black disabled:bg-yellow-700"
+          onClick={verifyAddress}
+          disabled={confirming}
+        >
+          Verify Address
+        </button>
+      </div>
+
+      {/* <BaseModal
+        open={accountCreated}
+        setOpen={setAccountCreated}
+        className="special-index bottom-0 top-0 mx-auto my-auto flex h-[300px] w-full items-center justify-center rounded-[16px] xl:w-[450px]"
+      >
+        <div className="flex w-full flex-col justify-center gap-8">
+          <div className="text-[20px]">Account Created Successfully</div>
+          <div
+            className="mx-auto flex w-8/12 cursor-pointer items-center justify-center rounded-[8px] bg-[#FFD000] px-2 py-4 text-[16px] text-[#000]"
+            onClick={() => router.push(`/creator`)}
+          >
+            Proceed
+          </div>
+        </div>
+      </BaseModal> */}
+    </div>
+  );
+};
+
+export default CreatorForm;

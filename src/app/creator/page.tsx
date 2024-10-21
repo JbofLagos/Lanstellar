@@ -1,28 +1,110 @@
 'use client';
-import React from 'react'
+import { useState, useEffect } from "react";
+import { useWriteContract,
+  useWaitForTransactionReceipt, useReadContract } from "wagmi";
+import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
 import DashboardLayout from '../_components/dashboard-items/dashboardLayout'
 import Estates from '../_components/estates/estates'
 import TopCollections from '../_components/collections/topCollections';
 import TrendingNow from '../_components/trending/trending';
+import DashboardModal from '../_components/modals/DashboardModal';
+
+export interface nftDetails {
+  tokenId: number;
+  seller: string;
+  price: number;
+  buyer: string;
+  forSale: boolean;
+  tokenURI: string;
+}
+
 
 const Creator = () => {
-  return (
-   <DashboardLayout current={1}>
-        <div className='w-full  relative flex flex-col overflow-y-scroll'>
-            <span className='text-white text-[35px] font-bold'>Welcome to Lanstellar</span>
-            <div className=' '>
-                  <Estates />
-            </div>
-            <div >
-              <TopCollections />
-            </div>
-            <div className='mt-10'>
-                <TrendingNow />
-            </div>
 
+  useEffect(() => {
+    localStorage.removeItem("token_ipfs");
+  }, []);
+
+  const { data } = useReadContract({
+    address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+    abi: lanStellarAbi,
+    functionName: "getListedProperties",
+  });
+
+  // console.log("propertiesdata:", data);
+
+  const [modal, setModal] = useState(false);
+  const [nftDetails, setNftDetails] = useState({
+    tokenId: 0,
+    seller: "",
+    price: 2,
+    buyer: "",
+    forSale: true,
+    tokenURI: "",
+  });
+  function toggleModal() {
+    setModal(!modal);
+  }
+
+  // const { data: hash, error, writeContract } = useWriteContract();
+
+  // function handleWithdrawFunds() {
+  //   writeContract({
+  //     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+  //     abi: lanStellarAbi,
+  //     functionName: "withdrawFunds",
+  //     args: ["tokenID"],
+  //   });
+  // }
+
+  // function handleBuyProperty() {
+  //   writeContract({
+  //     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+  //     abi: lanStellarAbi,
+  //     functionName: "buyProperty",
+  //     args: [nftDetails.name, nftDetails.price],
+  //   });
+  // }
+
+  // const { isLoading: isConfirming, isSuccess: isConfirmed } =
+  //   useWaitForTransactionReceipt({
+  //     hash,
+  //   });
+
+  return (
+    <DashboardLayout current={1}>
+      {modal && (
+        <DashboardModal details={nftDetails} closeModal={toggleModal} />
+      )}
+
+      <div className="relative flex w-full flex-col overflow-y-scroll">
+        <span className="text-[35px] font-bold text-white">
+          Welcome to Lanstellar
+        </span>
+        <div className=" ">
+          <Estates
+            propertyArray={data}
+            toggleModal={toggleModal}
+            setNftDetails={setNftDetails}
+          />
         </div>
+        <div>
+          <TopCollections
+            propertyArray={data}
+            toggleModal={toggleModal}
+            setNftDetails={setNftDetails}
+          />
+        </div>
+        <div className="mt-10">
+          <TrendingNow
+            propertyArray={data}
+            toggleModal={toggleModal}
+            setNftDetails={setNftDetails}
+          />
+        </div>
+      </div>
     </DashboardLayout>
-  )
+  );
 }
 
 export default Creator
