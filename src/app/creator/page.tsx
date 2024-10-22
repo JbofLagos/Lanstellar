@@ -17,15 +17,6 @@ export interface nftDetails {
   tokenURI: string;
 }
 
-// export interface nftDetails {
-//   buyer: `0x${string}`;
-//   forSale: boolean;
-//   price: bigint;
-//   seller: `0x${string}`;
-//   tokenId: bigint;
-//   tokenURI: string;
-// }
-
 const Creator = () => {
   const { data } = useReadContract({
     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
@@ -33,15 +24,8 @@ const Creator = () => {
     functionName: "getListedProperties",
   });
 
-  // const { data } = useReadContract<nftDetails[]>({
-  //   address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
-  //   abi: lanStellarAbi,
-  //   functionName: "getListedProperties",
-  // });
-
-  // console.log("propertiesdata:", data);
-
   const [modal, setModal] = useState(false);
+
   const [nftDetails, setNftDetails] = useState<nftDetails>({
     tokenId: 2,
     seller: "",
@@ -59,15 +43,7 @@ const Creator = () => {
 
   const { data: hash, isPending, error, writeContract } = useWriteContract();
 
-  // function handleWithdrawFunds() {
-  //   writeContract({
-  //     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
-  //     abi: lanStellarAbi,
-  //     functionName: "withdrawFunds",
-  //     args: ["tokenID"],
-  //   });
-  // }
-
+  
   function handleBuyProperty() {
     const sellerPercent = (1 / 100) * Number(nftDetails.price);
     const totalMoneyToPay =
