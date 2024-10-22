@@ -1,5 +1,7 @@
 'use client';
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { type BaseError, useWriteContract } from "wagmi";
+import { lanStellarAbi } from '~/Constants/ABI/lanStellarContracts';
 import type { nftDetails } from '~/app/creator/page';
 // import { useRouter } from "next/navigation";
 import Image from 'next/image';
@@ -20,7 +22,6 @@ const TopCollections = ({
   toggleModal,
   propertyArray,
 }: TopCollectionsProps) => {
-  // const page: number[] = [3, 6, 9, 12, 15];
 
   const rowsPerPage = 3;
 
@@ -50,37 +51,34 @@ const TopCollections = ({
     setCurrentPage(Math.min(number, totalPages));
   };
 
-  // const [modal, setModal] = useState(false);
-  // const [nftDetails, setNftDetails] = useState<nftDetails>({
-  //   name: "",
-  //   price: "",
-  // });
-  // function toggleModal() {
-  //     setModal(!modal);
-  // }
-  //   const [selectedPage, setSelectedPage] = useState<number | null>(null);
-  // const [selectedTimeline, setSelectedTimeline] = useState<string | null>(null);
+  const { data: hash, isPending, error, writeContract } = useWriteContract();
 
-  //   const handleSelectPage = (number: number) => {
-  //     setSelectedPage((prevSelected) =>
-  //       prevSelected === number ? null : number,
-  //       );
-  //   };
+  const [selectedTokenId, setSelectedTokenId] = useState<number | null>(null);
+  function handleWithdrawFunds(tokenId: number) {
+    setSelectedTokenId(tokenId);
+    writeContract({
+      address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+      abi: lanStellarAbi,
+      functionName: "withdrawFunds",
+      args: [BigInt(tokenId)],
+    });
+  }
 
-  // const handleSelectTimeline = (timeline: { duration: string }) => {
-  //     setSelectedTimeline(prevSelected => (prevSelected === timeline.duration ? null : timeline.duration));
-  // };
+  useEffect(() => {
+    if (hash) {
+      alert("Withdrawal Successful");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hash]);
 
-  //   const router = useRouter();
+  useEffect(() => {
+    if (error) {
+      alert((error as BaseError).shortMessage || error.message);
+    }
+  }, [error]);
+
   return (
     <>
-      {/* {modal && (
-          <DashboardModal
-            name={nftDetails?.name}
-            price={nftDetails?.price}
-            closeModal={toggleModal}
-          />
-        )} */}
       <div className="flex w-full flex-col overflow-y-scroll pt-8">
         <span className="pb-1 text-[28px] font-bold text-white">
           Listed Properties
@@ -119,14 +117,14 @@ const TopCollections = ({
 
         <div className="mt-4 flex w-full justify-between">
           <table className="flex w-full flex-col gap-1">
-            <thead className="mb-4 flex w-full flex-row pl-32 pr-4">
+            <thead className="mb-4 flex w-full flex-row pl-3 pr-4">
               <tr className="flex w-full items-start">
-                <td className="flex flex-row gap-2 font-bold">
-                  <p className="text-[20px] text-white">#</p>
-                  <p className="text-[20px] text-white">Property Image</p>
+                <td className="flex flex-row gap-5 font-bold">
+                  <p className="text-[16px] text-white">S/N</p>
+                  <p className="text-[16px] text-white">Property Image</p>
                 </td>
               </tr>
-              <tr className="flex w-full flex-row items-end justify-end gap-20 font-bold">
+              <tr className="mr-11 flex w-full flex-row items-end justify-end gap-24 font-bold">
                 <td className="">
                   <p className="text-[16px] text-white">For Sale</p>
                 </td>
@@ -137,23 +135,25 @@ const TopCollections = ({
                 <td className="">
                   <p className="text-[16px] text-white">TokenID</p>
                 </td>
-                {/* <td className="">
-                  <p className="text-[16px] text-white">Listed</p>
-                </td> */}
+                <td className="">
+                  <p className="text-[16px] text-white">Action</p>
+                </td>
               </tr>
             </thead>
             {currentData?.map((asset, index) => (
               <tbody
                 key={index}
-                className="mt-4 flex w-full cursor-pointer flex-row items-center pr-4"
+                className="mt-4 flex w-full flex-row items-center pr-4"
                 //   onClick={() => router.push(`/top-collection/${index}`)}
-                onClick={() => {
-                  setNftDetails(asset);
-                  toggleModal();
-                }}
               >
-                <tr className="flex w-full items-start">
-                  <td className="flex flex-row items-center gap-5">
+                <tr
+                  className="flex w-full cursor-pointer items-start pl-3"
+                  onClick={() => {
+                    setNftDetails(asset);
+                    toggleModal();
+                  }}
+                >
+                  <td className="flex flex-row items-center gap-8">
                     <p className="text-[16px] text-white">{index + 1}</p>
                     <div className="relative">
                       {/* <img
@@ -176,7 +176,7 @@ const TopCollections = ({
                     {/* <p className="text-[16px] text-white">{asset.name}</p> */}
                   </td>
                 </tr>
-                <tr className="flex w-full flex-row items-end mr-[10px] justify-end gap-32">
+                <tr className="mr-[10px] flex w-full flex-row items-end justify-end gap-32">
                   <td className="">
                     <p className="text-[16px] text-white">
                       {asset.forSale ? "Yes" : "No"}
@@ -193,9 +193,15 @@ const TopCollections = ({
                       {asset.tokenId.toString()}
                     </p>
                   </td>
-                  {/* <td className="">
-                    <p className="text-[16px] text-white">{asset.listed}</p>
-                  </td> */}
+                  <td className="">
+                    <button
+                      className="flex w-full items-center justify-center rounded-[16px] bg-[#FFD000] px-3 py-2 text-[10px] font-bold text-black disabled:bg-yellow-700"
+                      onClick={() => handleWithdrawFunds(asset.tokenId)}
+                      disabled={asset.tokenId === selectedTokenId && isPending}
+                    >
+                      Withdraw Funds
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             ))}
