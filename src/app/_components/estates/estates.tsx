@@ -46,11 +46,12 @@ const Estates = ({
             alt="property Preview"
           ></img> */}
           <Image
+            priority
             src={property.tokenURI}
             alt="estate"
             width={500}
             height={500}
-            className="h-full w-full object-cover"
+            className="h-auto w-auto object-cover"
           />
           <div className="absolute bottom-0 left-2 flex w-full items-center justify-between bg-gradient-to-t from-black via-transparent to-transparent px-8 py-2 text-white">
             {/* <h2 className="text-[24px]">{estate.name}</h2> */}

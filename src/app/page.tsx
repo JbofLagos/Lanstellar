@@ -8,56 +8,39 @@ import Navbar from "./_components/navbar/navbar";
 // import { Coinbase, Metamask, WalletConnect } from './assets/icons/icons'
 // import DefaultButton from "./_components/buttons/defaultButton";
 import { useRouter } from "next/navigation";
-import { ConnectWallet, ConnectWalletText, Wallet } from "@coinbase/onchainkit/wallet";
+import {
+  ConnectWallet,
+  ConnectWalletText,
+  Wallet,
+} from "@coinbase/onchainkit/wallet";
 import { Avatar, Name } from "@coinbase/onchainkit/identity";
 import { verifierAbi } from "~/Constants/ABI/verifyWalletAddress";
 
 const HomePage = () => {
   const router = useRouter();
-  // const [walletConnected, setWalletConnected] = useState(false);
-  // const [walletAddress, setWalletAddress] = useState<string | null>(null);
 
-  const {address: userWalletAddress, isConnected } = useAccount();
+  const { address: userWalletAddress, } = useAccount();
 
-const { data: isValid } = useReadContract({
-  address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
-  abi: verifierAbi,
-  functionName: "verify",
-  args: [userWalletAddress!],
-});
-
-  // function checkIfUserIsVerified() {
-  //   const { data: isValid } = useReadContract({
-  //     address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
-  //     abi: Verifier,
-  //     functionName: "verify",
-  //     args: [userWalletAddress as `0x${string}`],
-  //   });
-
-  //   if (isValid) {
-  //     return router.push(`/creator`);
-  //   } else {
-  //     return router.push(`/creator-registration`);
-  //   }
-  // }
-
-  // if (isConnected && userWalletAddress) {
-  //   if (isValid) {
-  //     return router.push(`/creator`);
-  //   } else {
-  //     return router.push(`/creator-registration`);
-  //   }
-  // }
+  const { data: isValid } = useReadContract({
+    address: process.env.NEXT_PUBLIC_VERIFICATION_CA as `0x${string}`,
+    abi: verifierAbi,
+    functionName: "verify",
+    args: [userWalletAddress!],
+  });
 
   useEffect(() => {
-    if (isConnected && userWalletAddress) {
+    if (userWalletAddress) {
       if (isValid) {
         return router.push(`/verify-kyc`);
       } else {
         return router.push(`/creator-registration`);
       }
     }
-  }, [isConnected, userWalletAddress, isValid, router]);
+  }, [userWalletAddress, isValid, router]);
+
+  // isConnected && 
+
+
   return (
     <div className="flex h-screen flex-col">
       <div className="fixed z-10 h-[88px] w-full">
@@ -80,7 +63,7 @@ const { data: isValid } = useReadContract({
         </div>
         <div className="flex h-screen w-full flex-grow flex-col items-center justify-center gap-4 bg-[#230C33] xl:w-6/12">
           <div className="flex flex-col items-center justify-center text-center">
-            <h3 className="font-montserrat text-[30px] font-bold leading-[48px] text-white xl:text-[40px] mb-3">
+            <h3 className="mb-3 font-montserrat text-[30px] font-bold leading-[48px] text-white xl:text-[40px]">
               Connect wallet
             </h3>
             <span className="max-w-[400px] font-montserrat text-[16px] font-normal leading-[35px] text-[white] xl:max-w-[600px] xl:text-[22px]">
