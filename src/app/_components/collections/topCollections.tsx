@@ -153,7 +153,7 @@ const TopCollections = ({
                 }}
               >
                 <tr className="flex w-full items-start">
-                  <td className="flex flex-row items-center gap-2">
+                  <td className="flex flex-row items-center gap-5">
                     <p className="text-[16px] text-white">{index + 1}</p>
                     <div className="relative">
                       {/* <img
@@ -163,11 +163,12 @@ const TopCollections = ({
                       ></img> */}
 
                       <Image
+                        priority
                         src={asset.tokenURI}
                         alt="land"
                         width={40}
                         height={40}
-                        className="w-[40px] rounded-[8px]"
+                        className="w-auto rounded-[8px]"
                       />
                       {/* <Image src={asset.network} alt='eth' className='w-[16px] absolute top-[-1px] right-[-2px]' /> */}
                     </div>
@@ -175,7 +176,7 @@ const TopCollections = ({
                     {/* <p className="text-[16px] text-white">{asset.name}</p> */}
                   </td>
                 </tr>
-                <tr className="flex w-full flex-row items-end justify-end gap-20">
+                <tr className="flex w-full flex-row items-end mr-[10px] justify-end gap-32">
                   <td className="">
                     <p className="text-[16px] text-white">
                       {asset.forSale ? "Yes" : "No"}

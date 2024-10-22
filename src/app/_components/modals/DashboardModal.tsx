@@ -6,14 +6,20 @@ import Image from "next/image";
 
 interface DashboardModalProps {
   details: nftDetails;
+  buy: () => void;
+  isPending: boolean;
   //   name: string;
   //   price: string;
   closeModal: () => void;
   //   children: React.ReactNode;
 }
 
-export default function DashboardModal({ details, closeModal }: DashboardModalProps) {
-    // const imageSrc: string = details.img.src;
+export default function DashboardModal({
+  details,
+  closeModal,
+  buy,
+  isPending,
+}: DashboardModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center transition duration-1000 ease-in-out">
       <div
@@ -21,20 +27,15 @@ export default function DashboardModal({ details, closeModal }: DashboardModalPr
         onClick={closeModal}
       ></div>
       <div className="bg-color z-10 flex h-[80vh] w-[75vw] transition duration-1000 ease-in-out">
-        <div className="w-50">
+        <div className="w-50 flex content-center justify-center">
           <Image
+            priority
             src={details.tokenURI}
             alt="image"
-            className="h-[80vh] w-[40vw] object-cover"
-            width={40}
-            height={80}
+            className="h-auto w-auto object-cover"
+            width={400}
+            height={500}
           />
-          {/* <img
-            className="h-full w-full rounded-[16px] object-cover"
-            // src={`https://${process.env.NEXT_PUBLIC_PINATA_GATEWAY_URL}/ipfs/${preview}`}
-            src={details.tokenURI}
-            alt="Avatar Preview"
-          ></img> */}
         </div>
         <div className="w-50 content-center space-y-6 p-12">
           {/* <p className="text-[20px] font-bold text-white">
@@ -44,13 +45,15 @@ export default function DashboardModal({ details, closeModal }: DashboardModalPr
             {" "}
             Price: <span className="font-thin">{details.price.toString()}</span>
           </p>
-          <button
-            className="flex w-full items-center justify-center rounded-[16px] bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black disabled:bg-yellow-700"
-            // onClick={handleSubmit(submitForm)}
-            // disabled={!isValid || !preview}
-          >
-            Buy now
-          </button>
+          {details.forSale === false ? null : (
+            <button
+              className="flex w-full items-center justify-center rounded-[16px] bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black disabled:bg-yellow-700"
+              onClick={buy}
+              disabled={isPending}
+            >
+              Buy now
+            </button>
+          )}
         </div>
       </div>
     </div>

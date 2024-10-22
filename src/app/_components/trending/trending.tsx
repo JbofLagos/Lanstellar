@@ -25,26 +25,23 @@ const TrendingNow = ({
         {propertyArray?.map((trending, index) => (
           <div
             key={index}
-            className="relative h-full min-w-[25%] cursor-pointer snap-center overflow-hidden rounded-[16px]"
+            // relative min-h-[25%] min-w-[25%] cursor-pointer snap-center overflow-hidden
+            className="h-auto min-w-[25%] cursor-pointer snap-center overflow-hidden rounded-[16px]"
             onClick={() => {
               setNftDetails(trending);
               toggleModal();
             }}
           >
-            <div className="flex w-full flex-col rounded-[16px] bg-[#1C092A] p-4">
+            <div className="flex h-full w-auto flex-col rounded-[16px] bg-[#1C092A] p-4">
               <Image
+                priority
                 src={trending.tokenURI}
                 alt="image"
-                width={500}
-                height={300}
-                className="h-[350px] w-full rounded-[16px]"
+                width={700}
+                height={400}
+                className="h-auto w-auto rounded-[16px]"
                 // className="h-[350px] w-full rounded-[16px] object-cover"
               />
-              {/* <img
-                className="h-[350px] w-full rounded-[16px] object-cover"
-                src={trending.tokenURI}
-                alt="Avatar Preview"
-              ></img> */}
               <div className="flex flex-row items-center gap-2 py-4">
                 {/* <span className="text-[24px] font-semibold text-white">
                   {trending.name}

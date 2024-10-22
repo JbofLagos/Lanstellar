@@ -34,6 +34,7 @@ const DashboardNav = () => {
         <span className="cursor-pointer items-center text-[24px] text-white">
           <Image
             alt="logo"
+            priority
             // className="items-center"
             src="/images/lanstellarlogonew.png"
             width={220}
@@ -62,20 +63,22 @@ const DashboardNav = () => {
           <NotificationIcon />
         </span>
 
-        {isConnected && <Wallet>
-          <ConnectWallet className="border-3 border-[#fff] bg-[#93b7be52] text-[#fff]">
-            <Avatar className="h-6 w-6" />
-            <Name />
-          </ConnectWallet>
-          <WalletDropdown className="bg-gray-300">
-            <Identity className="px-4 pb-2 pt-3" hasCopyAddressOnClick>
-              <Avatar />
-              <Name className="text-[#fff]" />
-              <Address className="text-[#fff]" />
-            </Identity>
-            <WalletDropdownDisconnect className="bg-[#FFD000] stroke-[#230C33] stroke-2 font-bold text-[#230C33] hover:bg-[#FFD000]" />
-          </WalletDropdown>
-        </Wallet>}
+        {isConnected && (
+          <Wallet>
+            <ConnectWallet className="border-3 border-[#fff] bg-[#93b7be52] text-[#fff]">
+              <Avatar className="h-6 w-6" />
+              <Name />
+            </ConnectWallet>
+            <WalletDropdown className="bg-gray-300">
+              <Identity className="px-4 pb-2 pt-3" hasCopyAddressOnClick>
+                <Avatar />
+                <Name className="text-[#fff]" />
+                <Address className="text-[#fff]" />
+              </Identity>
+              <WalletDropdownDisconnect className="bg-[#FFD000] stroke-[#230C33] stroke-2 font-bold text-[#230C33] hover:bg-[#FFD000]" />
+            </WalletDropdown>
+          </Wallet>
+        )}
 
         {/* <div
           className="flex w-[180px] cursor-pointer items-center justify-start gap-4 rounded-[16px] bg-[#93b7be52] px-4 py-2 text-[16px] text-[#1E1E1E]"

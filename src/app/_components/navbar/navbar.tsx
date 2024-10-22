@@ -13,7 +13,13 @@ const Navbar = () => {
       onClick={() => router.push(`/`)}
     >
       {/* <Image alt="logo" src={lanstellarlogonew} className="w-[260px]" /> */}
-      <Image alt="logo" src="/images/lanstellarlogonew.png" width={220} height={220} />
+      <Image
+        priority
+        alt="logo"
+        src="/images/lanstellarlogonew.png"
+        width={220}
+        height={220}
+      />
     </div>
   );
 }

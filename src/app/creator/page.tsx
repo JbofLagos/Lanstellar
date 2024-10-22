@@ -1,12 +1,12 @@
-'use client';
+"use client";
 import { useState, useEffect } from "react";
-import {useReadContract } from "wagmi";
+import { type BaseError, useReadContract, useWriteContract } from "wagmi";
 import { lanStellarAbi } from "~/Constants/ABI/lanStellarContracts";
-import DashboardLayout from '../_components/dashboard-items/dashboardLayout'
-import Estates from '../_components/estates/estates'
-import TopCollections from '../_components/collections/topCollections';
-import TrendingNow from '../_components/trending/trending';
-import DashboardModal from '../_components/modals/DashboardModal';
+import DashboardLayout from "../_components/dashboard-items/dashboardLayout";
+import Estates from "../_components/estates/estates";
+import TopCollections from "../_components/collections/topCollections";
+import TrendingNow from "../_components/trending/trending";
+import DashboardModal from "../_components/modals/DashboardModal";
 
 export interface nftDetails {
   tokenId: number;
@@ -26,11 +26,7 @@ export interface nftDetails {
 //   tokenURI: string;
 // }
 
-
 const Creator = () => {
-
-  
-
   const { data } = useReadContract({
     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
     abi: lanStellarAbi,
@@ -55,15 +51,13 @@ const Creator = () => {
     tokenURI: "",
   });
 
-  useEffect(() => {
-    localStorage.removeItem("token_ipfs");
-  }, []);
+  
 
   function toggleModal() {
     setModal(!modal);
   }
 
-  // const { data: hash, error, writeContract } = useWriteContract();
+  const { data: hash, isPending, error, writeContract } = useWriteContract();
 
   // function handleWithdrawFunds() {
   //   writeContract({
@@ -74,24 +68,43 @@ const Creator = () => {
   //   });
   // }
 
-  // function handleBuyProperty() {
-  //   writeContract({
-  //     address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
-  //     abi: lanStellarAbi,
-  //     functionName: "buyProperty",
-  //     args: [nftDetails.name, nftDetails.price],
-  //   });
-  // }
+  function handleBuyProperty() {
+    const sellerPercent = (1 / 100) * Number(nftDetails.price);
+    const totalMoneyToPay =
+      BigInt(nftDetails.price) + BigInt(Math.round(sellerPercent));
+    
+    writeContract({
+      address: process.env.NEXT_PUBLIC_LANSTELLAR_CA as `0x${string}`,
+      abi: lanStellarAbi,
+      functionName: "buyProperty",
+      args: [BigInt(nftDetails.tokenId), totalMoneyToPay],
+    });
+  }
 
-  // const { isLoading: isConfirming, isSuccess: isConfirmed } =
-  //   useWaitForTransactionReceipt({
-  //     hash,
-  //   });
+  useEffect(() => {
+    localStorage.removeItem("token_ipfs");
+    if (hash) {
+      toggleModal();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hash]);
+
+  useEffect(() => {
+    if (error) {
+      alert((error as BaseError).shortMessage || error.message);
+    }
+  }, [error]);
+
 
   return (
     <DashboardLayout current={1}>
       {modal && (
-        <DashboardModal details={nftDetails} closeModal={toggleModal} />
+        <DashboardModal
+          isPending={isPending}
+          buy={handleBuyProperty}
+          details={nftDetails}
+          closeModal={toggleModal}
+        />
       )}
 
       <div className="relative flex w-full flex-col overflow-y-scroll">
@@ -125,6 +138,6 @@ const Creator = () => {
       </div>
     </DashboardLayout>
   );
-}
+};
 
-export default Creator
+export default Creator;

@@ -108,17 +108,8 @@ const ListProperty = () => {
             className="flex w-full items-center justify-center rounded-[16px] bg-[#FFD000] px-8 py-3 text-[20px] font-bold text-black disabled:bg-yellow-700"
             onClick={handleListProperty}
             disabled={isPending || !tokenPrice || !tokenId}
-
-            // disabled={
-            //   isPending ||
-            //   !state.tokenId ||
-            //   !state.tokenName ||
-            //   !state.tokenPrice ||
-            //   !tokenDesc ||
-            //   !preview
-            // }
           >
-            List Porperty
+            List Property
           </button>
         </div>
       </div>

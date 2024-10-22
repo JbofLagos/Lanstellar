@@ -95,9 +95,9 @@ const CreateToken = () => {
 
   useEffect(() => {
     if (hash) {
+      router.push(`/list-property`);
       setTokenPrice("");
       // setTokenDesc(undefined);
-      router.push(`/list-property`);
     }
   }, [hash, router]);
 
