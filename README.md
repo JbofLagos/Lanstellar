@@ -1,7 +1,6 @@
 # LanStellar: Decentralized Real Estate Platform
 ### Overview
-LanStellar is a decentralized marketplace built on the Base Network. It serves as a platform for landowners to list their properties and for investors to purchase these properties securely through smart contracts.
-It combines cutting-edge technology with unique features to create a secure, transparent, and efficient marketplace for property transactions.
+LanStellar is a decentralized platform for real world asset management and verification built on the superchain and powered by A.I Agents
 
 ### Key Features
 - Zero-Knowledge Proofs: Ensures privacy and security of sensitive property information 
