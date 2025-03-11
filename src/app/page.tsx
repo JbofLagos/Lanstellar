@@ -32,7 +32,7 @@ const HomePage = () => {
         <Navbar />
       </div>
 
-  
+
       <div className="relative flex h-screen items-center justify-center bg-gray-100 px-4 sm:px-6 lg:px-8">
         <Image
           src={lanstel}
@@ -41,7 +41,7 @@ const HomePage = () => {
         />
 
         <div className="relative text-center flex flex-col gap-6 max-w-2xl">
-       
+
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text 
                          bg-gradient-to-r from-purple-700 to-purple-400 leading-tight tracking-tight drop-shadow-lg">
             Instantly Verify <br />
@@ -50,13 +50,13 @@ const HomePage = () => {
             with AI & Blockchain.
           </h1>
 
-       
+
           <p className="mt-4 text-lg sm:text-xl text-gray-600">
             Enter an address or GPS coordinates to get ownership history, legitimacy status, and market value.
           </p>
 
-         
-          <div className="mt-6 flex w-full max-w-lg mx-auto items-center 
+
+          <div className="mt-6 flex w-full  mx-auto items-center 
                           justify-between rounded-lg border border-gray-300 
                           bg-white px-4 py-3 shadow-md">
             <input
@@ -69,7 +69,7 @@ const HomePage = () => {
             </button>
           </div>
 
-        
+
           <div className="mt-10 flex flex-wrap justify-center gap-8 text-purple-700">
             <div className="text-center w-1/2 sm:w-auto">
               <h2 className="text-3xl sm:text-4xl font-bold">50,000+</h2>
