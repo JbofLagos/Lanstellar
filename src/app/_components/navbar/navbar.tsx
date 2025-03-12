@@ -17,32 +17,33 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="flex items-center justify-between px-6 md:px-12 lg:px-20 py-4 bg-transparent">
+    <nav className="flex items-center justify-between px-6 md:px-8 lg:px-20 py-4 bg-transparent">
 
       <div className="flex items-center cursor-pointer" onClick={() => router.push(`/`)}>
         <Image
           src="/images/Logo.png"
           alt="Lanstellar Logo"
-          width={130}
+          width={100} 
           height={30}
-          className="mr-2 md:w-[170px] md:h-[40px]"
+          className="mr-2 md:w-[150px] md:h-[40px]"
         />
       </div>
 
-
-      <ul className="hidden md:flex gap-12 lg:gap-24 text-gray-700 font-medium">
+    
+      <ul className="hidden md:flex gap-4 lg:gap-12 text-gray-700 font-medium">
         <li className="cursor-pointer hover:text-purple-600">Home</li>
         <li className="cursor-pointer hover:text-purple-600">Verify Assets</li>
         <li className="cursor-pointer hover:text-purple-600">API Docs</li>
+        <li className="cursor-pointer hover:text-purple-600">WhitePaper</li>
         <li className="cursor-pointer hover:text-purple-600">About</li>
       </ul>
 
 
-      <div className="hidden md:flex items-center gap-6">
-        <button className="flex items-center gap-2 text-gray-700">
+      <div className="hidden md:flex items-center gap-4">
+        {/* <button className="flex items-center gap-2 text-gray-700">
           <FaGlobe className="text-lg" />
           <span>En</span>
-        </button>
+        </button> */}
 
 
         <div className="flex justify-center">
@@ -74,10 +75,10 @@ const Navbar = () => {
           </ul>
 
           <div className="flex flex-col gap-4">
-            <button className="flex items-center gap-2 text-gray-700">
+            {/* <button className="flex items-center gap-2 text-gray-700">
               <FaGlobe className="text-lg" />
               <span>En</span>
-            </button>
+            </button> */}
 
 
             <div className="flex justify-center">
