@@ -6,7 +6,7 @@ import { type Metadata } from "next";
 import { headers } from "next/headers";
 import { cookieToInitialState } from "wagmi";
 import { getConfig } from "~/Constants/config/wagmiConfig";
-import { Providers } from "~/Constants/providers/onchainProviders";
+import { Providers  } from "~/Constants/providers/onchainProviders";
 
 export const metadata: Metadata = {
   title: "Lanstellar",

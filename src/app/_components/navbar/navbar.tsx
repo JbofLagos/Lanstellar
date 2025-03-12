@@ -23,13 +23,13 @@ const Navbar = () => {
         <Image
           src="/images/Logo.png"
           alt="Lanstellar Logo"
-          width={130} 
+          width={130}
           height={30}
           className="mr-2 md:w-[170px] md:h-[40px]"
         />
       </div>
 
-    
+
       <ul className="hidden md:flex gap-12 lg:gap-24 text-gray-700 font-medium">
         <li className="cursor-pointer hover:text-purple-600">Home</li>
         <li className="cursor-pointer hover:text-purple-600">Verify Assets</li>
