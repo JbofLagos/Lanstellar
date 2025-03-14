@@ -1,3 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.animate-slide {
+  animation: slide 5s linear infinite;
+}
+/* Pause on hover for better user experience */
+.overflow-x-auto:hover .animate-slide {
+  animation-play-state: paused;
+}
+
+/* Partners Section */
+.overflow-x-auto {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
