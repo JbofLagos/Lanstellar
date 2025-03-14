@@ -8,9 +8,8 @@ const Hero = () => {
 
   // Define the gradient style based on theme
   const heroTextGradient = {
-    backgroundImage: `linear-gradient(to right, ${
-      isDarkMode ? "#FFFFFF" : "#24223E"
-    }, #8A27BA)`,
+    backgroundImage: `linear-gradient(to right, ${isDarkMode ? "#FFFFFF" : "#24223E"
+      }, #8A27BA)`,
     backgroundClip: "text",
     WebkitBackgroundClip: "text", // For Safari support
     color: "transparent",
@@ -36,9 +35,8 @@ const Hero = () => {
 
       {/* Hero Section */}
       <div
-        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-72 ${
-          isDarkMode ? "text-white" : "text-black"
-        }`}
+        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-72 ${isDarkMode ? "text-white" : "text-black"
+          }`}
       >
         {/* Text Content */}
         <div className="text-center max-w-4xl mx-auto space-y-6">
@@ -52,9 +50,8 @@ const Hero = () => {
             Assets with AI & Blockchain
           </h1>
           <p
-            className={`text-gray-400 text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed ${
-              isDarkMode ? "" : "text-gray-600"
-            }`}
+            className={`text-gray-400 text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed ${isDarkMode ? "" : "text-gray-600"
+              }`}
           >
             Lorem ipsum dolor sit amet consectetur. Pharetra netus turpis porttitor
             felis pellentesque porttitor integer. Imperdiet lobortis ac bibendum.
@@ -86,9 +83,8 @@ const Hero = () => {
       <div className="py-2 sm:py-2 md:py-24 lg:py-28">
         <div className="mx-auto max-w-[90%] sm:max-w-3xl md:max-w-5xl lg:max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2
-            className={`text-center font-bricolageGrotesque text-2xl sm:text-3xl md:text-4xl font-semibold ${
-              isDarkMode ? "text-white" : "text-black"
-            }`}
+            className={`text-center font-bricolageGrotesque text-2xl sm:text-3xl md:text-4xl font-semibold ${isDarkMode ? "text-white" : "text-black"
+              }`}
             style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 600 }}
           >
             Our Lead Partners

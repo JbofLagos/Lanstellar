@@ -7,9 +7,8 @@ const Features = () => {
 
   // Define the gradient style based on theme
   const featureTextGradient = {
-    backgroundImage: `linear-gradient(to right, ${
-      isDarkMode ? "#FFFFFF" : "#24223E"
-    }, #8A27BA)`,
+    backgroundImage: `linear-gradient(to right, ${isDarkMode ? "#FFFFFF" : "#24223E"
+      }, #8A27BA)`,
     backgroundClip: "text",
     WebkitBackgroundClip: "text", // For Safari support
     color: "transparent",
@@ -18,9 +17,8 @@ const Features = () => {
   return (
     <>
       <section
-        className={`relative text-${
-          isDarkMode ? "white" : "gray-800"
-        } overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24`}
+        className={`relative text-${isDarkMode ? "white" : "gray-800"
+          } overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24`}
       >
         {/* Gradient Effects (positioned behind content) */}
         {/* <div className="absolute w-[15rem] h-[15rem] sm:w-[20rem] sm:h-[20rem] md:w-[25rem] md:h-[25rem] lg:w-[30rem] lg:h-[30rem] top-[5%] left-[5%] bg-[#6A11CB] rounded-full opacity-30 blur-[40px] sm:blur-[60px] md:blur-[80px] pointer-events-none transform -translate-x-1/2 -translate-y-1/2" />
@@ -43,9 +41,8 @@ const Features = () => {
                 Search Assets Using Location and GPS Coordinates
               </h2>
               <p
-                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${
-                  isDarkMode ? "text-gray-400" : "text-gray-600"
-                }`}
+                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${isDarkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
               >
                 Lorem ipsum dolor sit amet consectetur. Nibh vulputat at facilisis
                 sollicitudin mauris neque ultricies.
@@ -69,9 +66,8 @@ const Features = () => {
                 Display Key Asset Details
               </h2>
               <p
-                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${
-                  isDarkMode ? "text-gray-400" : "text-gray-600"
-                }`}
+                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${isDarkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
               >
                 Lorem ipsum dolor sit amet consectetur. Nibh vulputat at facilisis
                 sollicitudin mauris neque ultricies.
@@ -95,9 +91,8 @@ const Features = () => {
                 AI Agents Verify User Assets
               </h2>
               <p
-                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${
-                  isDarkMode ? "text-gray-400" : "text-gray-600"
-                }`}
+                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${isDarkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
               >
                 Lorem ipsum dolor sit amet consectetur. Nibh vulputat at facilisis
                 sollicitudin mauris neque ultricies.
@@ -121,9 +116,8 @@ const Features = () => {
                 A Hashing Algorithm
               </h2>
               <p
-                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${
-                  isDarkMode ? "text-gray-400" : "text-gray-600"
-                }`}
+                className={`text-sm sm:text-base md:text-lg mt-3 sm:mt-4 leading-relaxed max-w-md ${isDarkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
               >
                 Lorem ipsum dolor sit amet consectetur. Nibh vulputat at facilisis
                 sollicitudin mauris neque ultricies.
@@ -137,37 +131,32 @@ const Features = () => {
       </section>
 
       <section
-        className={`relative text-${
-          isDarkMode ? "white" : "gray-800"
-        } py-12 sm:py-16 md:py-20 lg:py-24`}
+        className={`relative text-${isDarkMode ? "white" : "gray-800"
+          } py-12 sm:py-16 md:py-20 lg:py-24`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:gap-10">
             {/* Card 1 */}
             <div
-              className={`backdrop-blur-xl outline outline-${
-                isDarkMode ? "white" : "gray-300"
-              } rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300`}
+              className={`backdrop-blur-xl outline outline-${isDarkMode ? "white" : "gray-300"
+                } rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300`}
             >
               <h2
-                className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 ${
-                  isDarkMode ? "text-gray-200" : "text-gray-700"
-                }`}
+                className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 ${isDarkMode ? "text-gray-200" : "text-gray-700"
+                  }`}
               >
                 Key Objectives
               </h2>
               <p
-                className={`text-sm sm:text-base mb-4 ${
-                  isDarkMode ? "text-gray-400" : "text-gray-600"
-                }`}
+                className={`text-sm sm:text-base mb-4 ${isDarkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
               >
                 Lorem ipsum dolor sit amet consectetur. Nibh voluptat at facilisis
                 sollicitudin.
               </p>
               <ul
-                className={`list-none space-y-2 ${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                }`}
+                className={`list-none space-y-2 ${isDarkMode ? "text-gray-300" : "text-gray-600"
+                  }`}
               >
                 <li className="flex items-center">
                   <span className="text-[#6a5af9] mr-2">•</span> Provide a
@@ -191,29 +180,25 @@ const Features = () => {
 
             {/* Card 2 */}
             <div
-              className={`backdrop-blur-xl outline outline-${
-                isDarkMode ? "white" : "gray-300"
-              } rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300`}
+              className={`backdrop-blur-xl outline outline-${isDarkMode ? "white" : "gray-300"
+                } rounded-xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300`}
             >
               <h2
-                className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 ${
-                  isDarkMode ? "text-gray-200" : "text-gray-700"
-                }`}
+                className={`text-xl sm:text-2xl md:text-3xl font-semibold mb-4 ${isDarkMode ? "text-gray-200" : "text-gray-700"
+                  }`}
               >
                 Key Objectives
               </h2>
               <p
-                className={`text-sm sm:text-base mb-4 ${
-                  isDarkMode ? "text-gray-400" : "text-gray-600"
-                }`}
+                className={`text-sm sm:text-base mb-4 ${isDarkMode ? "text-gray-400" : "text-gray-600"
+                  }`}
               >
                 Lorem ipsum dolor sit amet consectetur. Nibh voluptat at facilisis
                 sollicitudin.
               </p>
               <ul
-                className={`list-none space-y-2 ${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                }`}
+                className={`list-none space-y-2 ${isDarkMode ? "text-gray-300" : "text-gray-600"
+                  }`}
               >
                 <li className="flex items-center">
                   <span className="text-[#6a5af9] mr-2">•</span> Provide a
