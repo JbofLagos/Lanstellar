@@ -1,8 +1,23 @@
 "use client";
 import React from "react";
 import heroImage from "../assets/images/hero.png";
+import { useTheme } from "../context/ThemeContext";
 
 const Hero = () => {
+  const { isDarkMode } = useTheme();
+
+  // Define the gradient style based on theme
+  const heroTextGradient = {
+    backgroundImage: `linear-gradient(to right, ${
+      isDarkMode ? "#FFFFFF" : "#24223E"
+    }, #8A27BA)`,
+    backgroundClip: "text",
+    WebkitBackgroundClip: "text", // For Safari support
+    color: "transparent",
+    fontFamily: "'Bricolage Grotesque', sans-serif",
+    fontWeight: 700,
+  };
+
   return (
     <section className="relative text-white overflow-hidden">
       {/* Gradient Effects (positioned behind hero image) */}
@@ -20,19 +35,27 @@ const Hero = () => {
       />
 
       {/* Hero Section */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-72">
+      <div
+        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-72 ${
+          isDarkMode ? "text-white" : "text-black"
+        }`}
+      >
         {/* Text Content */}
         <div className="text-center max-w-4xl mx-auto space-y-6">
           <h1
-            className="font-bricolageGrotesque font-bold text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[68px] leading-[100%] tracking-[0] bg-gradient-to-r from-white to-[#8A27BA] saturate-150 text-transparent bg-clip-text"
-            style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 700 }}
+            className="font-bold text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[68px] leading-[100%] tracking-[0] saturate-150"
+            style={heroTextGradient}
           >
             Instantly Verify Real-World
             <br className="block sm:hidden" /> {/* Mobile line break */}
             <span className="hidden sm:inline"> </span> {/* Space for larger screens */}
             Assets with AI & Blockchain
           </h1>
-          <p className="text-gray-400 text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed">
+          <p
+            className={`text-gray-400 text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed ${
+              isDarkMode ? "" : "text-gray-600"
+            }`}
+          >
             Lorem ipsum dolor sit amet consectetur. Pharetra netus turpis porttitor
             felis pellentesque porttitor integer. Imperdiet lobortis ac bibendum.
           </p>
@@ -63,7 +86,9 @@ const Hero = () => {
       <div className="py-2 sm:py-2 md:py-24 lg:py-28">
         <div className="mx-auto max-w-[90%] sm:max-w-3xl md:max-w-5xl lg:max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2
-            className="text-center font-bricolageGrotesque text-2xl sm:text-3xl md:text-4xl font-semibold text-white"
+            className={`text-center font-bricolageGrotesque text-2xl sm:text-3xl md:text-4xl font-semibold ${
+              isDarkMode ? "text-white" : "text-black"
+            }`}
             style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 600 }}
           >
             Our Lead Partners

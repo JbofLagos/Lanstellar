@@ -1,16 +1,18 @@
 // @ts-nocheck
 "use client";
 import React, { useState } from "react";
-import { FaGlobe, FaBars, FaTimes } from "react-icons/fa";
+import { FaGlobe, FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 import { ConnectButton } from "thirdweb/react";
 import { ethereum } from "thirdweb/chains";
 import { client } from "../client";
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md flex items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 py-4 w-full">
+    <nav className={`fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md flex items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 py-4 w-full ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
       {/* Logo Section */}
       <div className="flex items-center cursor-pointer">
         <img src="/images/Logo.png" alt="Lanstellar Logo" width={130} height={30} className="mr-2 md:w-[120px] md:h-[30px]" />
@@ -38,6 +40,12 @@ const Navbar = () => {
           theme="purple"
           className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2"
         />
+        <button
+          onClick={toggleTheme}
+          className="ml-4 text-2xl"
+        >
+          {isDarkMode ? <FaSun /> : <FaMoon />}
+        </button>
       </div>
 
       {/* Hamburger Menu Button (Mobile) */}
@@ -50,7 +58,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-black z-50 shadow-lg py-4 flex flex-col items-center space-y-4 md:hidden">
+        <div className={`absolute top-16 left-0 w-full bg-black z-50 shadow-lg py-4 flex flex-col items-center space-y-4 md:hidden ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
           <ul className="text-gray-300 font-medium w-full text-center">
             <li
               className="py-2 cursor-pointer hover:text-white"
@@ -86,6 +94,12 @@ const Navbar = () => {
               theme="purple"
               className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm flex items-center justify-center gap-2"
             />
+            <button
+              onClick={toggleTheme}
+              className="text-2xl"
+            >
+              {isDarkMode ? <FaSun /> : <FaMoon />}
+            </button>
           </div>
         </div>
       )}

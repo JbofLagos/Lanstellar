@@ -1,50 +1,30 @@
-export default function Example() {
-    return (
-      <div className="">
-        <div className="mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
-          <div className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
-            <svg
-              viewBox="0 0 1024 1024"
-              aria-hidden="true"
-              className="absolute top-1/2 left-1/2 -z-10 size-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0"
-            >
-              <circle r={512} cx={512} cy={512} fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.7" />
-              <defs>
-                <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-                  <stop stopColor="#7775D6" />
-                  <stop offset={1} stopColor="#E935C1" />
-                </radialGradient>
-              </defs>
-            </svg>
-            <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-              <h2 className="text-3xl font-semibold tracking-tight text-balance text-white sm:text-4xl">
-              Ready to Verify Real World Asset With AI?
-              </h2>
-             
-              <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-                <a
-                  href="#"
-                  className="rounded-md bg-gradient-to-r from-purple-600 to-purple-700 px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                >
-                  Get started<span aria-hidden="true" className="transform -rotate-45 transition-transform">→</span>
-                </a>
-                <a href="#" className="text-sm/6 bg-white px-3.5 py-2.5 rounded-md font-semibold text-gray-900 shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
-                  Contact Us 
-                </a>
-              </div>
-            </div>
-            <div className="relative mt-16 h-80 lg:mt-8">
-              <img
-                alt="App screenshot"
-                src="src/assets/images/hero.png"
-                width={1824}
-                height={1080}
-                className="absolute top-0 left-0 w-[57rem] max-w-none rounded-md bg-white/5 ring-1 ring-white/10"
-              />
-            </div>
-          </div>
-        </div>
+import React from "react";
+import { useTheme } from '../context/ThemeContext';
+
+export default function CTA() {
+  const { isDarkMode } = useTheme();
+
+  return (
+    <div className={`relative outline outline-${isDarkMode ? 'white' : 'gray-800'} mx-auto mb-6 flex flex-col gap-4 items-center justify-center min-h-[20vh] max-w-7xl py-12 px-4 sm:px-6 lg:px-8 rounded-xl ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+      <h2 className={`text-center font-bricolage text-2xl sm:text-3xl md:text-4xl font-semibold leading-8 sm:leading-10 md:leading-12 ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+        Ready to Verify Real World Asset With AI?
+      </h2>
+      <div className="flex flex-row flex-wrap gap-4 justify-center mt-4">
+        <a
+          href="#"
+          className={`inline-flex items-center gap-2 bg-gradient-to-r from-${isDarkMode ? 'purple-600' : 'purple-600'} to-${isDarkMode ? 'purple-700' : 'purple-700'} hover:from-${isDarkMode ? 'purple-700' : 'purple-700'} hover:to-${isDarkMode ? 'purple-800' : 'purple-800'} text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-${isDarkMode ? 'purple-500/30' : 'purple-500/30'} transform hover:-translate-y-1`}
+        >
+          Launch App
+          <span className="transform -rotate-45 transition-transform">→</span>
+        </a>
+        <a
+          href="/dashboard"
+          className={`inline-flex items-center gap-2 bg-${isDarkMode ? 'white' : 'white'} hover:from-${isDarkMode ? 'purple-700' : 'purple-700'} hover:to-${isDarkMode ? 'purple-800' : 'purple-800'} text-${isDarkMode ? 'gray-900' : 'gray-900'} px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-${isDarkMode ? 'purple-500/30' : 'purple-500/30'} transform hover:-translate-y-1`}
+        >
+          Get started
+        </a>
       </div>
-    )
-  }
+    </div>
+  );
+}
   
