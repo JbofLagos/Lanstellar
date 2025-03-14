@@ -9,45 +9,22 @@ import { client } from "../client";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Define custom styles for the ConnectButton
-  const customButtonStyle = {
-    backgroundColor: "#8B5CF6", // Your brand color
-    color: "#FFFFFF",           // White text for contrast
-    border: "none",
-    borderRadius: "8px",
-    padding: "0.5rem 1rem",
-    fontWeight: "500",
-    transition: "background-color 0.2s ease",
-  };
-
   return (
-    <nav className="flex items-center justify-between px-6 md:px-12 lg:px-20 py-4 bg-transparent w-full">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-md flex items-center justify-between px-4 sm:px-6 md:px-12 lg:px-20 py-4 w-full">
       {/* Logo Section */}
       <div className="flex items-center cursor-pointer">
-        <img
-          src="/images/Logo.png"
-          alt="Lanstellar Logo"
-          width={130}
-          height={30}
-          className="mr-2 md:w-[120px] md:h-[30px]"
-        />
+        <img src="/images/Logo.png" alt="Lanstellar Logo" width={130} height={30} className="mr-2 md:w-[120px] md:h-[30px]" />
       </div>
 
       {/* Desktop Menu */}
-      <ul className="hidden md:flex gap-4 lg:gap-24 text-gray-700 font-medium">
-        <li className="cursor-pointer hover:text-purple-600">Home</li>
-        <li className="cursor-pointer hover:text-purple-600">About</li>
-        <li className="cursor-pointer hover:text-purple-600">WhitePaper</li>
+      <ul className="hidden md:flex gap-6 lg:gap-12 text-gray-300 font-medium">
+        <li className="cursor-pointer hover:text-white">Home</li>
+        <li className="cursor-pointer hover:text-white">Verify Asset</li>
+        <li className="cursor-pointer hover:text-white">About</li>
       </ul>
 
       {/* Desktop Buttons */}
-      <div className="hidden md:flex items-center gap-6">
-        {/* Uncomment if needed */}
-        {/* <button className="flex items-center gap-2 text-gray-700">
-          <FaGlobe className="text-lg" />
-          <span>En</span>
-        </button> */}
-
+      <div className="hidden md:flex items-center">
         <ConnectButton
           client={client}
           connectModal={{ size: "compact" }}
@@ -56,20 +33,16 @@ const Navbar = () => {
             sponsorGas: true,
           }}
           connectButton={{
-            label: "Sign in",
-            style: customButtonStyle, // Apply custom styles
+            label: "Launch app ↗",
           }}
-          theme={{
-            "--tw-bg": "#8B5CF6", // Fallback for theme customization
-            "--tw-text": "#FFFFFF",
-          }}
-          className="hover:bg-[#7C3AED]" // Tailwind hover class
+          theme="purple"
+          className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2"
         />
       </div>
 
       {/* Hamburger Menu Button (Mobile) */}
       <button
-        className="md:hidden text-gray-700 text-2xl"
+        className="md:hidden text-gray-300 text-2xl"
         onClick={() => setMenuOpen(!menuOpen)}
       >
         {menuOpen ? <FaTimes /> : <FaBars />}
@@ -77,41 +50,29 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="absolute top-16 left-0 w-full bg-white z-50 shadow-lg py-4 flex flex-col items-center space-y-4 md:hidden">
-          <ul className="text-gray-700 font-medium w-full text-center">
+        <div className="absolute top-16 left-0 w-full bg-black z-50 shadow-lg py-4 flex flex-col items-center space-y-4 md:hidden">
+          <ul className="text-gray-300 font-medium w-full text-center">
             <li
-              className="py-2 cursor-pointer hover:text-purple-600"
+              className="py-2 cursor-pointer hover:text-white"
               onClick={() => setMenuOpen(false)}
             >
               Home
             </li>
             <li
-              className="py-2 cursor-pointer hover:text-purple-600"
+              className="py-2 cursor-pointer hover:text-white"
               onClick={() => setMenuOpen(false)}
             >
-              Verify Assets
+              Verify Asset
             </li>
             <li
-              className="py-2 cursor-pointer hover:text-purple-600"
-              onClick={() => setMenuOpen(false)}
-            >
-              WhitePaper
-            </li>
-            <li
-              className="py-2 cursor-pointer hover:text-purple-600"
+              className="py-2 cursor-pointer hover:text-white"
               onClick={() => setMenuOpen(false)}
             >
               About
             </li>
           </ul>
 
-          <div className="flex flex-col gap-4">
-            {/* Uncomment if needed */}
-            {/* <button className="flex items-center gap-2 text-gray-700">
-              <FaGlobe className="text-lg" />
-              <span>En</span>
-            </button> */}
-
+          <div className="flex flex-col gap-4 w-full px-6">
             <ConnectButton
               client={client}
               connectModal={{ size: "compact" }}
@@ -120,14 +81,10 @@ const Navbar = () => {
                 sponsorGas: true,
               }}
               connectButton={{
-                label: "Sign in",
-                style: customButtonStyle, // Apply same custom styles
+                label: "Launch app ↗",
               }}
-              theme={{
-                "--tw-bg": "#8B5CF6",
-                "--tw-text": "#FFFFFF",
-              }}
-              className="hover:bg-[#7C3AED]" // Consistent hover effect
+              theme="purple"
+              className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm flex items-center justify-center gap-2"
             />
           </div>
         </div>
