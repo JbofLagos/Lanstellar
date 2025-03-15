@@ -35,7 +35,7 @@ const Hero = () => {
             Unlock the Future of Asset Investment with LanStellar
           </h1>
           <p
-            className={`text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed ${
+            className={`text-[12px] md:text-lg max-w-[90%] mx-auto leading-relaxed ${
               isDarkMode ? "text-white" : "text-gray-600"
             }`}
           >
@@ -55,7 +55,7 @@ const Hero = () => {
         </div>
 
         {/* Hero Image */}
-        <div className="relative w-full max-w-[90%] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl mx-auto mt-8 sm:mt-10 md:mt-12 lg:mt-16 px-2 sm:px-4">
+        <div className="relative w-full md:max-w-3xl lg:max-w-4xl mx-auto mt-8 sm:mt-10 md:mt-12 lg:mt-16 px-2 sm:px-4">
           <div className="relative rounded-2xl overflow-hidden shadow-xl shadow-purple-900/20 hover:shadow-2xl transition-shadow duration-300">
             <img
               src={heroImage}
