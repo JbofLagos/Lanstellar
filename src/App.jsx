@@ -6,6 +6,7 @@ import Features from "./components/Features";
 import CTA from "./components/CTA";
 import { ThemeProvider } from "./context/ThemeContext"; // Import useTheme here
 import Layout from "./components/Layout";
+import UseCase from "./components/UseCase";
 
 // A child component to handle theme-dependent rendering
 const MainAppContent = () => {
@@ -14,6 +15,7 @@ const MainAppContent = () => {
       <Navbar />
       <Hero />
       <Features />
+      <UseCase />
       <CTA />
     </Layout>
   );
