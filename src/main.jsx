@@ -9,6 +9,8 @@ import {
   createWallet,
 } from "thirdweb/wallets";
 import App from './App.jsx';
+// Supports weights 100-900
+import '@fontsource-variable/inter';
 
 // Initialize the Thirdweb client
 const client = createThirdwebClient({

@@ -5,26 +5,19 @@ import Hero from "./components/Hero";
 import Features from "./components/Features";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
-import { ThemeProvider, useTheme } from "./context/ThemeContext"; // Import useTheme here
+import { ThemeProvider } from "./context/ThemeContext"; // Import useTheme here
+import Layout from "./components/Layout";
 
 // A child component to handle theme-dependent rendering
 const MainAppContent = () => {
-  const { isDarkMode } = useTheme(); // Now this works with the import
-
   return (
-    <div
-      className={`min-h-screen font-bricolageGrotesque w-full flex flex-col ${
-        isDarkMode ? "bg-gradient-to-b from-[#0A071A] to-[#1A1433]" : "bg-white"
-      }`}
-    >
+    <Layout>
       <Navbar />
-      <main className="flex-grow w-full">
-        <Hero />
-        <Features />
-        <CTA />
-        <Footer />
-      </main>
-    </div>
+      <Hero />
+      <Features />
+      <CTA />
+      <Footer />
+    </Layout>
   );
 };
 

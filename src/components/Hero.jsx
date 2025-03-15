@@ -2,6 +2,7 @@
 import React from "react";
 import heroImage from "../assets/images/hero.png";
 import { useTheme } from "../context/ThemeContext";
+import { BsArrowUpRight } from "react-icons/bs";
 
 const Hero = () => {
   const { isDarkMode } = useTheme();
@@ -20,54 +21,37 @@ const Hero = () => {
 
   return (
     <section className="relative text-white overflow-hidden">
-      {/* Gradient Effects (positioned behind hero image) */}
       <div
-        className="absolute w-[40rem] h-16 sm:w-[50rem] sm:h-20 lg:w-[60rem] lg:h-24 top-[40%] left-[70%] -translate-x-1/2 -translate-y-1/2 opacity-50 bg-[#6A11CB] rounded-full blur-[60px] sm:blur-[80px] pointer-events-none transform rotate-[-150deg]"
-        style={{ top: "641.13px", left: "1228.52px" }}
-      />
-      <div
-        className="absolute w-[40rem] h-16 sm:w-[50rem] sm:h-20 lg:w-[60rem] lg:h-24 top-[40%] right-[10%] -translate-y-1/2 opacity-50 bg-[#FF6FF5] rounded-full blur-[60px] sm:blur-[80px] pointer-events-none transform rotate-[-150deg]"
-        style={{ top: "627.14px", left: "1685.89px" }}
-      />
-      <div
-        className="absolute w-[40rem] h-16 sm:w-[50rem] sm:h-20 lg:w-[60rem] lg:h-24 top-[35%] left-[40%] -translate-x-1/2 -translate-y-1/2 opacity-50 bg-[#6F8CFF] rounded-full blur-[60px] sm:blur-[80px] pointer-events-none transform rotate-[-150deg]"
-        style={{ top: "595.14px", left: "854.39px" }}
-      />
-
-      {/* Hero Section */}
-      <div
-        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-72 ${
+        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-56 ${
           isDarkMode ? "text-white" : "text-black"
         }`}
       >
         {/* Text Content */}
-        <div className="text-center max-w-4xl mx-auto space-y-6">
+        <div className="text-center max-w-4xl mx-auto space-y-6 place-items-center">
           <h1
             className="font-bold text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[68px] leading-[100%] tracking-[0] saturate-150"
             style={heroTextGradient}
           >
-            Instantly Verify Real-World
-            <br className="block sm:hidden" /> {/* Mobile line break */}
-            <span className="hidden sm:inline"> </span> {/* Space for larger screens */}
-            Assets with AI & Blockchain
+            Unlock the Future of Asset Investment with LanStellar
           </h1>
           <p
-            className={`text-gray-400 text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed ${
-              isDarkMode ? "" : "text-gray-600"
+            className={`text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed ${
+              isDarkMode ? "text-white" : "text-gray-600"
             }`}
           >
-            Lorem ipsum dolor sit amet consectetur. Pharetra netus turpis porttitor
-            felis pellentesque porttitor integer. Imperdiet lobortis ac bibendum.
+            Bridge the gap between blockchain innovation and real-world assets.
+            Verify ownership, history, and value in seconds—powered by AI and
+            secured by blockchain.
           </p>
 
           {/* CTA Button */}
-          <a
+          <button
             href="#"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-medium transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-purple-500/30 transform hover:-translate-y-1"
+            className="flex items-center w-fit gap-2 bg-gradient-to-br  from-[#4A009A] from-30% via-[#8A27BA] via-70% to-[#FF6FF5] to-100%  rounded-[8px] hover:to-[#4A009A] hover:via-[#8A27BA] hover:from-[#FF6FF5] text-white text-[14px] px-[24px] py-[12px] font-medium transition-all duration-300 shadow-md"
           >
-            Launch App
-            <span className="transform rotate-45 transition-transform">→</span>
-          </a>
+            Join Waitlist
+            <BsArrowUpRight />
+          </button>
         </div>
 
         {/* Hero Image */}
@@ -83,17 +67,16 @@ const Hero = () => {
       </div>
 
       {/* Partners Section */}
-      <div className="py-2 sm:py-2 md:py-24 lg:py-28">
+      <div className="">
         <div className="mx-auto max-w-[90%] sm:max-w-3xl md:max-w-5xl lg:max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2
-            className={`text-center font-bricolageGrotesque text-2xl sm:text-3xl md:text-4xl font-semibold ${
-              isDarkMode ? "text-white" : "text-black"
+            className={`text-center text-lg font-normal ${
+              isDarkMode ? "text-[#959AB1]" : "text-[#959AB1]"
             }`}
-            style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 600 }}
           >
             Our Lead Partners
           </h2>
-          <div className="mt-8 sm:mt-10 overflow-x-auto whitespace-nowrap">
+          <div className="mt-8 overflow-x-auto whitespace-nowrap">
             <div className="inline-flex space-x-6 sm:space-x-8 md:space-x-10 animate-slide">
               <img
                 alt="Transistor"
