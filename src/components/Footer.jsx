@@ -24,8 +24,7 @@ const Footer = () => {
               isDarkMode ? "white/70" : "#24223E"
             } text-sm leading-relaxed`}
           >
-            Lorem ipsum dolor sit amet consectetur. Suspendisse egestas dui
-            tristique risus arcu nullam.
+            Verify ownership, history, and value in seconds—powered by AI and secured by blockchain.
           </p>
           <button
             href="#"
