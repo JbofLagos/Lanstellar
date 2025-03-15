@@ -9,8 +9,9 @@ const Hero = () => {
 
   // Define the gradient style based on theme
   const heroTextGradient = {
-    backgroundImage: `linear-gradient(to right, ${isDarkMode ? "#FFFFFF" : "#24223E"
-      }, #8A27BA)`,
+    backgroundImage: `linear-gradient(to right, ${
+      isDarkMode ? "#FFFFFF" : "#24223E"
+    }, #8A27BA)`,
     backgroundClip: "text",
     WebkitBackgroundClip: "text", // For Safari support
     color: "transparent",
@@ -21,21 +22,7 @@ const Hero = () => {
   return (
     <section className="relative text-white overflow-hidden">
       <div
-        className="absolute w-[40rem] h-16 sm:w-[50rem] sm:h-20 lg:w-[60rem] lg:h-24 top-[40%] left-[70%] -translate-x-1/2 -translate-y-1/2 opacity-50 bg-[#6A11CB] rounded-full blur-[60px] sm:blur-[80px] pointer-events-none transform rotate-[-150deg]"
-        style={{ top: "641.13px", left: "1228.52px" }}
-      />
-      <div
-        className="absolute w-[40rem] h-16 sm:w-[50rem] sm:h-20 lg:w-[60rem] lg:h-24 top-[40%] right-[10%] -translate-y-1/2 opacity-50 bg-[#FF6FF5] rounded-full blur-[60px] sm:blur-[80px] pointer-events-none transform rotate-[-150deg]"
-        style={{ top: "627.14px", left: "1685.89px" }}
-      />
-      <div
-        className="absolute w-[40rem] h-16 sm:w-[50rem] sm:h-20 lg:w-[60rem] lg:h-24 top-[35%] left-[40%] -translate-x-1/2 -translate-y-1/2 opacity-50 bg-[#6F8CFF] rounded-full blur-[60px] sm:blur-[80px] pointer-events-none transform rotate-[-150deg]"
-        style={{ top: "595.14px", left: "854.39px" }}
-      />
-
-      {/* Hero Section */}
-      <div
-        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-72 ${
+        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-56 ${
           isDarkMode ? "text-white" : "text-black"
         }`}
       >
@@ -48,8 +35,8 @@ const Hero = () => {
             Unlock the Future of Asset Investment with LanStellar
           </h1>
           <p
-            className={`text-gray-400 text-sm sm:text-base md:text-lg max-w-[90%] sm:max-w-xl mx-auto leading-relaxed ${
-              isDarkMode ? "" : "text-gray-600"
+            className={`text-[12px] md:text-lg max-w-[90%] mx-auto leading-relaxed ${
+              isDarkMode ? "text-white" : "text-gray-600"
             }`}
           >
             Bridge the gap between blockchain innovation and real-world assets.
@@ -81,69 +68,32 @@ const Hero = () => {
 
       {/* Partners Section */}
       <div className="">
-        <div className="mx-auto max-w-[90%] sm:max-w-3xl md:max-w-5xl lg:max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="space-y-6 mx-auto w-full">
           <h2
-            className={`text-center font-bricolageGrotesque text-2xl sm:text-3xl md:text-4xl font-semibold ${
-              isDarkMode ? "text-white" : "text-black"
+            className={`text-center text-lg font-normal ${
+              isDarkMode ? "text-[#959AB1]" : "text-[#959AB1]"
             }`}
-            style={{ fontFamily: "'Bricolage Grotesque', sans-serif", fontWeight: 600 }}
           >
             Our Lead Partners
           </h2>
-          <div className="mt-8 overflow-x-auto whitespace-nowrap">
-            <div className="inline-flex space-x-6 sm:space-x-8 md:space-x-10 animate-slide">
-              <img
-                alt="Transistor"
-                src="src/assets/images/base.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="Reform"
-                src="src/assets/images/celo.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="Tuple"
-                src="src/assets/images/aave.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="SavvyCal"
-                src="src/assets/images/arbitrum.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="Statamic"
-                src="src/assets/images/circle.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              {/* Duplicate logos for seamless looping */}
-              <img
-                alt="Transistor (duplicate)"
-                src="src/assets/images/base.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="Reform (duplicate)"
-                src="src/assets/images/celo.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="Tuple (duplicate)"
-                src="src/assets/images/aave.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="SavvyCal (duplicate)"
-                src="src/assets/images/arbitrum.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-              <img
-                alt="Statamic (duplicate)"
-                src="src/assets/images/circle.png"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain inline-block"
-              />
-            </div>
+          <div className=" overflow-x-auto whitespace-nowrap">
+            {isDarkMode ? (
+              <div className="flex items-center md:justify-center gap-6">
+                <img alt="Base" src="base.svg" className="w-20" />
+                <img alt="Arbitrum" src="arb.svg" className="w-26" />
+                <img alt="Circle" src="circle.svg" className="w-24" />
+                <img alt="Celo" src="celo.svg" className="w-20" />
+                <img alt="Lisk" src="lisk.svg" className="w-[80px]" />
+              </div>
+            ) : (
+              <div className="flex items-center md:justify-center gap-6">
+                <img alt="Base" src="base1.svg" className="w-20" />
+                <img alt="Arbitrum" src="arb1.svg" className="w-26" />
+                <img alt="Circle" src="circle1.svg" className="w-24" />
+                <img alt="Celo" src="celo1.svg" className="w-20" />
+                <img alt="Lisk" src="lisk1.svg" className="w-[80px]" />
+              </div>
+            )}
           </div>
         </div>
       </div>
