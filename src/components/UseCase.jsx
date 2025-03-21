@@ -43,7 +43,7 @@ export default function UseCase() {
           }`}
         >
           <div className="w-full h-fit rounded-lg overflow-hidden">
-            <img src="comodity.jpg" alt="" className="object-cover" />
+            <img src="commodity.jpg" alt="" className="object-cover" />
           </div>
           <p className="font-semibold text-2xl">Commodities</p>
           <p className="font-light text-sm">
