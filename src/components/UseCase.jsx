@@ -25,7 +25,7 @@ export default function UseCase() {
           </div>
           <p className="font-semibold text-2xl">Real Estate</p>
           <p className="font-light text-sm">
-            Verify property titles and zoning laws before purchasing.
+          Verify property prices, titles and zoning laws before investing.
           </p>
         </div>
         <div
@@ -55,7 +55,7 @@ export default function UseCase() {
           </div>
           <p className="font-semibold text-2xl">Commodities</p>
           <p className="font-light text-sm">
-            Assess the value of oil, minerals, or farmland with geolocated data.
+            Assess the value of gold, diamonds, or farmland with geolocated data.
           </p>
         </div>
         <div
@@ -68,7 +68,7 @@ export default function UseCase() {
           </div>
           <p className="font-semibold text-2xl">Stocks and Bonds</p>
           <p className="font-light text-sm">
-            Verify property prices, titles and zoning laws before investing.
+            Verify company stock and government bonds.
           </p>
         </div>
       </div>
