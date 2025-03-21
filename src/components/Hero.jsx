@@ -9,9 +9,8 @@ const Hero = () => {
 
   // Define the gradient style based on theme
   const heroTextGradient = {
-    backgroundImage: `linear-gradient(to right, ${
-      isDarkMode ? "#FFFFFF" : "#24223E"
-    }, #8A27BA)`,
+    backgroundImage: `linear-gradient(to right, ${isDarkMode ? "#FFFFFF" : "#24223E"
+      }, #8A27BA)`,
     backgroundClip: "text",
     WebkitBackgroundClip: "text", // For Safari support
     color: "transparent",
@@ -22,9 +21,8 @@ const Hero = () => {
   return (
     <section className="relative text-white overflow-hidden">
       <div
-        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-56 ${
-          isDarkMode ? "text-white" : "text-black"
-        }`}
+        className={`relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24 lg:py-56 ${isDarkMode ? "text-white" : "text-black"
+          }`}
       >
         {/* Text Content */}
         <div className="text-center max-w-4xl mx-auto space-y-6 place-items-center">
@@ -35,9 +33,8 @@ const Hero = () => {
             Unlock the Future of Asset Investment with LanStellar
           </h1>
           <p
-            className={`text-[12px] md:text-lg max-w-[90%] mx-auto leading-relaxed ${
-              isDarkMode ? "text-white" : "text-gray-600"
-            }`}
+            className={`text-[12px] md:text-lg max-w-[90%] mx-auto leading-relaxed ${isDarkMode ? "text-white" : "text-gray-600"
+              }`}
           >
             Bridge the gap between blockchain innovation and real-world assets.
             Verify ownership, history, and value in seconds—powered by AI and
@@ -67,33 +64,35 @@ const Hero = () => {
       </div>
 
       {/* Partners Section */}
-      <div className="">
-        <div className="space-y-6 mx-auto w-full">
+      <div className="py-8 sm:py-12 md:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
-            className={`text-center text-lg font-normal ${
-              isDarkMode ? "text-[#959AB1]" : "text-[#959AB1]"
-            }`}
+            className={`text-center text-lg sm:text-xl md:text-2xl font-normal ${isDarkMode ? "text-[#959AB1]" : "text-[#959AB1]"
+              }`}
           >
             Our Lead Partners
           </h2>
-          <div className=" overflow-x-auto whitespace-nowrap">
-            {isDarkMode ? (
-              <div className="flex items-center md:justify-center gap-6">
-                <img alt="Base" src="base.svg" className="w-20" />
-                <img alt="Arbitrum" src="arb.svg" className="w-26" />
-                <img alt="Circle" src="circle.svg" className="w-24" />
-                <img alt="Celo" src="celo.svg" className="w-20" />
-                <img alt="Lisk" src="lisk.svg" className="w-[80px]" />
-              </div>
-            ) : (
-              <div className="flex items-center md:justify-center gap-6">
-                <img alt="Base" src="base1.svg" className="w-20" />
-                <img alt="Arbitrum" src="arb1.svg" className="w-26" />
-                <img alt="Circle" src="circle1.svg" className="w-24" />
-                <img alt="Celo" src="celo1.svg" className="w-20" />
-                <img alt="Lisk" src="lisk1.svg" className="w-[80px]" />
-              </div>
-            )}
+          <div className="mt-6 overflow-hidden relative">
+            {/* Marquee Container */}
+            <div className="inline-flex animate-marquee whitespace-nowrap md:justify-center">
+              {isDarkMode ? (
+                <>
+                  <img alt="Base" src="base.svg" className="w-16 sm:w-20 md:w-24 lg:w-28 mx-4" />
+                  <img alt="Arbitrum" src="arb.svg" className="w-20 sm:w-24 md:w-28 lg:w-32 mx-4" />
+                  <img alt="Circle" src="circle.svg" className="w-18 sm:w-22 md:w-26 lg:w-30 mx-4" />
+                  <img alt="Celo" src="celo.svg" className="w-16 sm:w-20 md:w-24 lg:w-28 mx-4" />
+                  <img alt="Lisk" src="lisk.svg" className="w-16 sm:w-20 md:w-24 lg:w-28 mx-4" />
+                </>
+              ) : (
+                <>
+                  <img alt="Base" src="base1.svg" className="w-16 sm:w-20 md:w-24 lg:w-28 mx-4" />
+                  <img alt="Arbitrum" src="arb1.svg" className="w-20 sm:w-24 md:w-28 lg:w-32 mx-4" />
+                  <img alt="Circle" src="circle1.svg" className="w-18 sm:w-22 md:w-26 lg:w-30 mx-4" />
+                  <img alt="Celo" src="celo1.svg" className="w-16 sm:w-20 md:w-24 lg:w-28 mx-4" />
+                  <img alt="Lisk" src="lisk1.svg" className="w-16 sm:w-20 md:w-24 lg:w-28 mx-4" />
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

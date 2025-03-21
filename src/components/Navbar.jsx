@@ -64,13 +64,18 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Hamburger Menu Button (Mobile) */}
-        <button
-          className="md:hidden text-gray-300 text-2xl"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+        {/* Mobile Buttons (Toggle and Menu) */}
+        <div className="flex items-center gap-4 md:hidden">
+          <button onClick={toggleTheme} className="text-2xl">
+            {isDarkMode ? <FaSun /> : <FaMoon />}
+          </button>
+          <button
+            className="text-gray-300 text-2xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
 
         {/* Mobile Menu */}
         {menuOpen && (
@@ -114,9 +119,7 @@ const Navbar = () => {
                 theme="purple"
                 className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm flex items-center justify-center gap-2"
               />
-              <button onClick={toggleTheme} className="text-2xl">
-                {isDarkMode ? <FaSun /> : <FaMoon />}
-              </button>
+              
             </div>
           </div>
         )}
