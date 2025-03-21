@@ -4,7 +4,7 @@ import { useTheme } from "../context/ThemeContext";
 export default function UseCase() {
   const { isDarkMode } = useTheme();
   return (
-    <div className="mx-auto w-full my-20 space-y-10">
+    <div className="mx-auto w-full my-20 min-h-[60dvh] space-y-10">
         <div className="w-full text-center">
             <h1 className={`font-bold text-[24px] ${
             isDarkMode ? "text-white" : "text-[#24223E]"
